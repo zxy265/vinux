@@ -38,8 +38,8 @@ augroup filetype_group
                 \ | nnoremap <buffer> <c-j> <CR><C-w>p
                 \ | nnoremap <buffer> <c-t> <C-w><CR><C-w>T
                 \ | nnoremap <buffer> <c-v> <C-w><CR><C-w>L<C-w>p<C-w>J<C-w>p
-                \ | nnoremap <buffer> <c-o> :colder<cr>
-                \ | nnoremap <buffer> <c-i> :cnewer<cr>
+                \ | nnoremap <buffer> <c-o> :silent! colder<cr>
+                \ | nnoremap <buffer> <c-i> :silent! cnewer<cr>
     " quickfix window  s/v to open in split window,  ,gd/,jd => quickfix window => open it
     autocmd FileType gitcommit,gina-status,gina-commit setlocal nofoldenable cursorline
     autocmd FileType qfreplace,vimcalc,man setlocal nonu nornu nofoldenable | imap <buffer> <c-d> :q<cr>
