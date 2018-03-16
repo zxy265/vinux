@@ -191,7 +191,9 @@ else
     let g:git_plugin_name.cur_val = 'vim-fugitive'
     Plug 'tpope/vim-fugitive'
     Plug 'gregsexton/gitv', { 'on': 'Gitv' }
+    Plug 'sodapopcan/vim-twiggy', { 'on': 'Twiggy' }
     let g:fugitive_no_maps=0
+    nnoremap <Leader>sb :Twiggy<cr>
     nnoremap <F3> :only<cr>:Gstatus<cr>
     " Open git status window
     nnoremap <Leader>gs :only<cr>:Gstatus<cr>gg<C-n>
