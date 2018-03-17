@@ -5,7 +5,7 @@ if v:version >= 704
     nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
 endif
 
-Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify',{'commit': '5df5b7478c09991bd20ab50cc65023cda826b2bf'}
 " }}}
 " VimStartify {{{
 if te#env#IsWindows()
