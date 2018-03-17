@@ -61,7 +61,7 @@ elseif g:fuzzysearcher_plugin_name.cur_val ==# 'denite.nvim' && te#env#SupportPy
 else
     "fallback to ctrlp
     let g:fuzzysearcher_plugin_name.cur_val = "ctrlp"
-    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'ctrlpvim/ctrlp.vim',{'commit':'35c9b961c916e4370f97cb74a0ba57435a3dbc25'}
     Plug 'tacahiroy/ctrlp-funky',{'on': 'CtrlPFunky'}
     Plug 'fisadev/vim-ctrlp-cmdpalette',{'on': 'CtrlPCmdPalette'}
     Plug 'zeero/vim-ctrlp-help',{'on': 'CtrlPHelp'}

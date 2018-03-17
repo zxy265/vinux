@@ -56,7 +56,7 @@ else
     let g:grepper_plugin.cur_val = 'vim-easygrep'
 endif
 if g:grepper_plugin.cur_val ==# 'vim-easygrep'
-    Plug 'dkprice/vim-easygrep'
+    Plug 'dkprice/vim-easygrep',{'commit':'d0c36a77cc63c22648e792796b1815b44164653a'}
     let g:EasyGrepRecursive=1
     if te#env#Executable('rg')
         set grepprg=rg\ -H\ --no-heading\ --vimgrep\ $*
