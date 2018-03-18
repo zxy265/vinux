@@ -11,7 +11,6 @@ function! te#tools#shell_pop(option) abort
         endif
         "any list buffer exist or buffer is startify
         if bufexists(expand('%')) && &filetype !=# 'startify'
-                    \ && &modified == 0
             let l:fullbuffer=0
             if and(a:option, 0x01)
                 let l:line=(38*&lines)/100
