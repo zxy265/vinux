@@ -39,5 +39,5 @@ function! te#meta#init() abort
 endfunction
 
 function! te#meta#map(maptype,keycodes,action) abort
-    execute a:maptype.' <silent> '.s:alt_char[a:keycodes].' '.a:action
+    execute a:maptype.' '.s:alt_char[a:keycodes].' '.a:action
 endfunction
