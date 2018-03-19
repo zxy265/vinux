@@ -42,9 +42,9 @@ call te#meta#map('noremap','9',':call te#utils#tab_buf_switch(9)<cr>')
 call te#meta#map('nnoremap','t',':tabnew<cr>')
 call te#meta#map('inoremap','t','<esc>:tabnew<cr>')
 "option+q
-call te#meta#map('noremap','q',':nohls<CR>:MarkClear<cr>:redraw!<cr>')
+call te#meta#map('noremap <silent> ','q',':nohls<CR>:MarkClear<cr>:redraw!<cr>')
 "no highlight
-nnoremap <Leader>nq :nohls<CR>:MarkClear<cr>:redraw!<cr>
+nnoremap  <silent> <Leader>nq :nohls<CR>:MarkClear<cr>:redraw!<cr>
 "select all
 call te#meta#map('noremap','a','gggH<C-O>G')
 call te#meta#map('inoremap','a','<C-O>gg<C-O>gH<C-O>G')
@@ -227,10 +227,10 @@ nnoremap  <leader>8 :call te#utils#tab_buf_switch(8)<cr>
 nnoremap  <leader>9 :call te#utils#tab_buf_switch(9)<cr>
 
 "switch previous tab or buftab
-nnoremap <Left> :call te#utils#tab_buf_switch(0)<cr>
+nnoremap <silent> <Left> :call te#utils#tab_buf_switch(0)<cr>
 
 "switch next tab or buftab
-nnoremap <Right> :call te#utils#tab_buf_switch(-1)<cr>
+nnoremap <silent> <Right> :call te#utils#tab_buf_switch(-1)<cr>
 
 "move
 nnoremap <Up> <C-b>
@@ -332,13 +332,13 @@ elseif te#env#SupportTerminal()
     "terminal-emulator setting
     "execute 'tnoremap <Esc> <C-\><C-n>' "effect <a-> key?
     silent! execute 'tnoremap <Esc><Esc> '.&termkey.'N'
-    call te#meta#map('tmap','h',&termkey.'h')
-    call te#meta#map('tmap','j',&termkey.'j')
-    call te#meta#map('tmap','k',&termkey.'k')
-    call te#meta#map('tmap','l',&termkey.'l')
+    call te#meta#map('tmap <silent> ','h',&termkey.'h')
+    call te#meta#map('tmap <silent> ','j',&termkey.'j')
+    call te#meta#map('tmap <silent> ','k',&termkey.'k')
+    call te#meta#map('tmap <silent> ','l',&termkey.'l')
     silent! execute 'tmap <c-v> '.&termkey.'"*'
-    call te#meta#map('tnoremap','b','<C-left>')
-    call te#meta#map('tnoremap','f','<C-right>')
+    call te#meta#map('tnoremap <silent> ','b','<C-left>')
+    call te#meta#map('tnoremap <silent> ','f','<C-right>')
 endif
 
 " Open plug status windows
@@ -348,14 +348,14 @@ nnoremap <Leader>pu :PlugUpdate<cr>
 " list plugins
 nnoremap <Leader>pl :call te#plug#list()<cr>
 "checkhealth
-nnoremap <Leader>ch :call te#utils#check_health()<cr>
+nnoremap <silent> <Leader>ch :call te#utils#check_health()<cr>
 " Open vimshell or neovim's emulator in split window
-nnoremap <Leader>as :call te#tools#shell_pop(0x1)<cr>
-noremap <F4> :call te#tools#shell_pop(0x1)<cr>
+nnoremap <silent> <Leader>as :call te#tools#shell_pop(0x1)<cr>
+noremap <silent> <F4> :call te#tools#shell_pop(0x1)<cr>
 " Open vimshell or neovim's emulator in vertical window
-nnoremap <Leader>av :call te#tools#shell_pop(0x2)<cr>
+nnoremap <silent> <Leader>av :call te#tools#shell_pop(0x2)<cr>
 " Open vimshell or neovim's emulator in new tab
-nnoremap <Leader>ns :call te#tools#shell_pop(0x4)<cr>
+nnoremap <silent> <Leader>ns :call te#tools#shell_pop(0x4)<cr>
 
 call te#meta#map('inoremap','u','<c-\><c-o>:call te#tools#PreviousCursor(6)<cr>')
 call te#meta#map('inoremap','d','<c-\><c-o>:call te#tools#PreviousCursor(7)<cr>')
