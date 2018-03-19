@@ -43,7 +43,7 @@ augroup filetype_group
     " quickfix window  s/v to open in split window,  ,gd/,jd => quickfix window => open it
     autocmd FileType gitcommit,gina-status,gina-commit setlocal nofoldenable cursorline
     autocmd FileType qfreplace,vimcalc,man setlocal nonu nornu nofoldenable | imap <buffer> <c-d> :q<cr>
-                \ | nmap <buffer> q :bdelete<cr>
+                \ | nmap <buffer> q :bdelete<cr> | setlocal matchpairs-=<:>
     autocmd FileType vim-plug nnoremap <buffer> <silent> H :call te#plug#open_doc()<cr> 
                 \ | nnoremap <buffer> <silent> gx :call te#plug#browse_plugin_url()<cr>
                 \ | nnoremap <buffer> <silent> <c-t> :call te#plug#open_plugin_dir()<cr>
