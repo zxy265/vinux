@@ -183,6 +183,7 @@ if g:git_plugin_name.cur_val ==# 'gina.vim' && te#env#SupportAsync()
                     \ 'blame', 'k',
                     \ 'k<Plug>(gina-blame-echo)'
                     \)
+        let g:gina#component#repo#commit_length=6
     endfunction
 
     call te#feat#register_vim_enter_setting(function('<SID>gina_setting'))
