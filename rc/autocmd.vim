@@ -12,7 +12,7 @@ augroup END
 
 augroup lazy_load_group
     autocmd!
-    autocmd InsertEnter * call te#feat#vim_plug_insert_enter()
+    autocmd InsertEnter * call te#feat#vim_plug_insert_enter(0)
                 \| autocmd! lazy_load_group
 augroup END
 
