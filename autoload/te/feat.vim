@@ -190,19 +190,16 @@ function! te#feat#register_vim_plug_insert_setting(funcref, plug_name) abort
     call extend(s:plugin_func_list_load_after_insert, a:funcref)
 endfunction
 
-function! te#feat#vim_plug_insert_enter(timer) abort
-    if get(g:,'vim_plug_insert_enter') == 0
-        let g:vim_plug_insert_enter=1
-        call plug#load(s:pluin_list_load_after_insert)
-        for l:Needle in s:plugin_func_list_load_after_insert
-            if type(l:Needle) == g:t_func
-                call l:Needle()
-            else
-                execute l:Needle
-            endif
-            unlet l:Needle
-        endfor
-    endif
+function! te#feat#vim_plug_insert_enter() abort
+    call plug#load(s:pluin_list_load_after_insert)
+    for l:Needle in s:plugin_func_list_load_after_insert
+        if type(l:Needle) == g:t_func
+            call l:Needle()
+        else
+            execute l:Needle
+        endif
+        unlet l:Needle
+    endfor
 endfunction
 
 function! te#feat#check_plugin_install() abort
@@ -264,8 +261,5 @@ function! te#feat#init_all() abort
             let s:feature_dict[l:key]=string(eval(l:key))
         endif
     endfor
-    "defer load plugins
-    if te#env#SupportTimer()
-        silent! call timer_start(5000, 'te#feat#vim_plug_insert_enter', {'repeat': 1})
-    endif
+
 endfunction
