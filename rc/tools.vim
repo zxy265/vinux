@@ -6,7 +6,7 @@ if te#env#SupportPy3()
     " vim calculator
     nnoremap <Leader>ac :Calc<cr>
 elseif te#env#SupportPy2()
-    Plug 'gregsexton/VimCalc',{'on': 'Calc'}
+    Plug 'tracyone/VimCalc',{'on': 'Calc'}
     " vim calculator
     nnoremap <Leader>ac :Calc<cr>
 else
