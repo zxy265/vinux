@@ -4,12 +4,11 @@ let s:denite_options = {
       \ 'default' : {
       \ 'winheight' : 15,
       \ 'mode' : 'insert',
-      \ 'quit' : 'true',
       \ 'highlight_matched_char' : 'MoreMsg',
       \ 'highlight_matched_range' : 'MoreMsg',
-      \ 'direction': 'rightbelow',
-      \ 'statusline' : has('patch-7.4.1154') ? v:false : 0,
-      \ 'prompt' : '➭',
+      \ 'direction': 'botright',
+      \ 'statusline' : has('patch-7.4.1154') ? v:true : v:false,
+      \ 'prompt' : '>',
       \ }}
 
 function! s:profile(opts) abort
