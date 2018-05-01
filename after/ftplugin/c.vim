@@ -9,11 +9,16 @@ if get(g:, 'feat_enable_c') != 1
 endif
 
 " add cscope database at the first time
-:call te#pg#add_cscope_out(1)
+if get(g:,'tagging_program').cur_val ==# 'gtags'
+    set csprg=gtags-cscope
+    :call te#pg#add_cscope_out(1,'.',1)
+else
+    set csprg=cscope
+    :call te#pg#add_cscope_out(1)
+endif
 
 " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
 set cscopetag
-set csprg=cscope
 " check cscope for definition of a symbol before checking ctags: set to 1
 " if you want the reverse search order.
 set csto=0

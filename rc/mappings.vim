@@ -305,7 +305,7 @@ nnoremap <silent> <BS> <C-o>
 nnoremap <Leader>nt :tabnew<cr>
 
 "generate tags and cscope
-nnoremap <localleader>u :call te#pg#do_cs_tags(getcwd(), 0x3)<cr>
+nnoremap <LocalLeader>u :call te#pg#gen_cs_out()<cr>
 
 nnoremap <leader>mw :call te#tools#max_win()<cr>
 

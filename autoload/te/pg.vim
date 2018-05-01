@@ -1,23 +1,30 @@
 "some programming function
 
 " add cscope database
+" a:1:read path from .project or pwd
+" a:2:use gtags or not
 function! te#pg#add_cscope_out(read_project,...) abort
+    if a:0 == 2 && a:2 == 1
+        let l:cscope_db_name='GTAGS'
+    else
+        let l:cscope_db_name='cscope.out'
+    endif
     if a:read_project == 1
         if empty(glob('.project'))
-            silent! execute 'cs kill cscope.out'
-            exec 'silent! cs add cscope.out'
+            silent! execute 'cs kill '.l:cscope_db_name
+            exec 'silent! cs add '.l:cscope_db_name
         else
             for s:line in readfile('.project', '')
-                exec 'silent! cs add '.s:line.'/cscope.out'
+                exec 'silent! cs add '.s:line.'/'.l:cscope_db_name
             endfor
         endif
     else
-        if a:0 == 1
-            silent! execute 'cs kill '.a:1.'/cscope.out'
-            exec 'cs add '.a:1.'/cscope.out'
+        if a:0 >= 1
+            silent! execute 'cs kill '.a:1.'/'.l:cscope_db_name
+            exec 'cs add '.a:1.'/'.l:cscope_db_name
         else
-            silent! execute 'cs kill cscope.out'
-            exec 'silent! cs add cscope.out'
+            silent! execute 'cs kill '.l:cscope_db_name
+            exec 'silent! cs add '.l:cscope_db_name
         endif
     endif
 endfunction
@@ -40,7 +47,11 @@ function! te#pg#gen_cscope_kernel(timerid) abort
         call te#utils#EchoWarning("Current directory is not in the top level of kernel tree")
     else
         :silent! call delete('cctree.out')
-        call te#utils#run_command('make O=. SRCARCH=arm SUBARCH=sunxi COMPILED_SOURCE=1 cscope tags', function('te#pg#add_cscope_out'),[0])
+        if &cscopeprg ==# 'gtags-cscope'
+            call te#utils#run_command('make O=. SRCARCH=arm SUBARCH=sunxi COMPILED_SOURCE=1 gtags', function('te#pg#add_cscope_out'),[0,'.',1])
+        else
+            call te#utils#run_command('make O=. SRCARCH=arm SUBARCH=sunxi COMPILED_SOURCE=1 cscope tags', function('te#pg#add_cscope_out'),[0])
+        endif
         :call te#utils#EchoWarning('Generating cscope database file for linux kernel ...')
     endif
 endfunction
@@ -61,6 +72,7 @@ endfunction
 "option: 0x01-->generate tags only
 "        0x02-->generate cscope only
 "        0x03-->generate cscope and tags
+"        0x04-->generate gtags
 function! te#pg#do_cs_tags(dir, option) abort
     if(te#env#IsWindows())
         let l:tagfile=a:dir.'\\'.'tags'
@@ -76,6 +88,10 @@ function! te#pg#do_cs_tags(dir, option) abort
     if type(a:option) != g:t_number
         call te#utils#EchoWarning('Wrong argument! Option must be a number', 'err')
         return
+    endif
+    if and(a:option, 0x04)
+        call te#utils#run_command('gtags '.a:dir, function('te#pg#add_cscope_out'),[0,a:dir,1])
+        return 0
     endif
     :silent! call delete(l:cctreeout)
     if and(a:option, 0x01)
@@ -121,13 +137,17 @@ endfunction
 " generate cscope database
 function! te#pg#gen_cs_out() abort
     let l:project_root=getcwd()
+    let l:option=0x02
+    if &cscopeprg ==# 'gtags-cscope'
+        let l:option=0x04
+    endif
     if empty(glob('.project'))
-        :call te#pg#do_cs_tags(getcwd(),0x02)
+        :call te#pg#do_cs_tags(getcwd(),l:option)
     else
         for l:line in readfile('.project', '')
             let l:ans=input('Generate cscope database in '.l:line.' [y/n/a]?','y')
             if l:ans =~# '\v^[yY]$'
-                call te#pg#do_cs_tags(l:line, 0x02)
+                call te#pg#do_cs_tags(l:line, l:option)
             endif
         endfor
     endif

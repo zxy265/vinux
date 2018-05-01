@@ -476,7 +476,7 @@ function! te#utils#check_health() abort
     call add(l:output, printf("%26s", "--------------------------------------------"))
     let l:i=l:i + 1
 
-    for needle in ['cscope', 'ctags', 'ag', 'rg', 'git', 
+    for needle in ['cscope', 'ctags', 'ag', 'rg', 'git', 'gtags',
                 \ 'clang', 'curl', 'bear', 'pbcopy', 'xsel', 'xclip', 'nvr']
         call add(l:output, printf("%26s:\t", ''.needle.''.' exist'))
         let l:i=l:i + 1
