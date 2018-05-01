@@ -5,7 +5,7 @@ Plug 'othree/html5.vim', {'for': 'html'}
 Plug 'moll/vim-node', {'for': 'javascript'}
 Plug 'maksimr/vim-jsbeautify', {'for': ['html', 'javascript', 'css', 'json', 'html'], 'do': 'npm install'}
 Plug 'tmhedberg/SimpylFold',    { 'for': 'python'}
-
+Plug 'python-mode/python-mode', { 'branch': 'develop','for': 'python','do': 'pip install --user autopep8' }
 let g:html_use_css=1
 let g:user_emmet_leader_key = '<c-e>'
 
