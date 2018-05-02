@@ -65,6 +65,9 @@ endif
 if g:complete_plugin_type.cur_val ==# 'YouCompleteMe'
     " jume to definition (YCM)
     function! s:enable_ycm()
+        if te#pg#top_of_kernel_tree()
+            let g:ycm_global_ycm_extra_conf = $VIMFILES.'/rc/ycm_conf_for_arm_linux.py'
+        endif
         call delete('.ycm_extra_conf.pyc')  | call youcompleteme#Enable() 
     endfunction
     let g:complete_plugin.enable_func=function('<SID>enable_ycm')

@@ -29,7 +29,7 @@ function! te#pg#add_cscope_out(read_project,...) abort
     endif
 endfunction
 
-function! s:top_of_kernel_tree()
+function! te#pg#top_of_kernel_tree() abort
     let l:tree_check= ["COPYING", "CREDITS", "Kbuild", "MAINTAINERS", "Makefile",
                 \ "README", "Documentation", "arch", "include", "drivers",
                 \ "fs", "init", "ipc", "kernel", "lib", "scripts"]
@@ -42,7 +42,7 @@ function! s:top_of_kernel_tree()
 endfunction
 
 function! te#pg#gen_cscope_kernel(timerid) abort
-    if !s:top_of_kernel_tree()
+    if !te#pg#top_of_kernel_tree()
         call te#pg#gen_cs_out()
         call te#utils#EchoWarning("Current directory is not in the top level of kernel tree")
     else
