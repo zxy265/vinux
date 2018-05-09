@@ -116,7 +116,7 @@ function! te#env#SupportTimer() abort
     return has('timers')
 endfunction
 
-function! te#env#SupportTerminal()
+function! te#env#SupportTerminal() abort
     return te#env#IsNvim() || (has('patch-8.0.1108') && has('terminal'))
 endfunction
 
@@ -124,12 +124,20 @@ function! te#env#SupportFeature(feature_name) abort
     return has(a:feature_name)
 endfunction
 
-function! te#env#check_requirement()
+function! te#env#check_requirement() abort
     if v:version > 703
         return 1
     elseif v:version ==# 703
         return has("patch1058")
     else
         return 0
+    endif
+endfunction
+
+function! te#env#get_termwinkey() abort
+    if has('patch-8.0.1743')
+        return &termwinkey
+    else
+        return &termkey
     endif
 endfunction

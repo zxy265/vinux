@@ -212,7 +212,11 @@ if te#env#IsVim8()
     let g:t_job=v:t_job
     let g:t_channel=v:t_channel
     if te#env#SupportTerminal()
-        set termkey=<s-n>
+        if has('patch-8.0.1743')
+            set termwinkey=<s-n>
+        else
+            set termkey=<s-n>
+        endif
     endif
 else
     let g:t_number=0
