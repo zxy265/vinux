@@ -14,7 +14,11 @@ else
     " vim calculator
     nnoremap <Leader>ac :Crunch<cr>
 endif
-Plug 'ianva/vim-youdao-translater', {'do': 'pip install requests --user','on': ['Ydc','Ydv']}
+if te#env#IsWindows()
+    Plug 'ianva/vim-youdao-translater', {'do': 'pip install requests --user','on': ['Ydc','Ydv']}
+endif
+command! -nargs=? Translate call te#trans#translate(<q-args>)
+command! -nargs=? -range TranslateReplace call te#trans#replace(<q-args>)
 Plug 'vim-scripts/DrawIt',{'on': 'DrawIt'}
 Plug 'mbbill/VimExplorer',{'on': 'VE'}
 Plug 'qpkorr/vim-renamer',{'on': 'Ren'}
@@ -46,11 +50,19 @@ endfunction
 nnoremap <leader>tf :call FencToggle()<cr>
 "}}}
 " YouDao translate
+nnoremap <Leader>az :Translate en:zh-CN<cr>
+" YouDao translate (visual mode)
+vnoremap <Leader>az :TranslateReplace en:zh-CN<cr>
+" YouDao translate
+nnoremap <Leader>ae :Translate zh-CN:en<cr>
+" YouDao translate (visual mode)
+vnoremap <Leader>ae :TranslateReplace zh-CN:en<cr>
+nnoremap <F10> <esc>:Ydc<cr>
+vnoremap <F10> <esc>:Ydv<cr>
+" YouDao translate
 nnoremap <Leader>ay <esc>:Ydc<cr>
 " YouDao translate (visual mode)
 vnoremap <Leader>ay <esc>:Ydv<cr>
-nnoremap <F10> <esc>:Ydc<cr>
-vnoremap <F10> <esc>:Ydv<cr>
 "hex to ascii convert
 nnoremap <leader>ah :call Hex2asciiConvert()<cr>
 " open current file's position with default file explorer

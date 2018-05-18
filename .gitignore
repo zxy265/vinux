@@ -22,3 +22,4 @@ autoload/plug.vim
 .LfCache/
 *.swn
 *.swo
+bin/trans
