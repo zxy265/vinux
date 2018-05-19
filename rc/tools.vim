@@ -14,9 +14,7 @@ else
     " vim calculator
     nnoremap <Leader>ac :Crunch<cr>
 endif
-if te#env#IsWindows()
-    Plug 'ianva/vim-youdao-translater', {'do': 'pip install requests --user','on': ['Ydc','Ydv']}
-endif
+Plug 'ianva/vim-youdao-translater', {'do': 'pip install requests --user','on': ['Ydc','Ydv']}
 command! -nargs=? Translate call te#trans#translate(<q-args>)
 command! -nargs=? -range TranslateReplace call te#trans#replace(<q-args>)
 Plug 'vim-scripts/DrawIt',{'on': 'DrawIt'}
