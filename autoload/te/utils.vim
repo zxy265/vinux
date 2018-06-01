@@ -228,36 +228,10 @@ function! te#utils#find_mannel() abort
     endif
 endfunction
 
-function! s:get_listed_buf_order_num() abort
-    let l:i=1
-	if te#env#SupportAsync()
-		let l:ret = getbufinfo({'buflisted':1})
-        for l:buf in l:ret
-            if l:buf.name !=# expand('%:p')
-                let l:i=l:i+1
-            else
-                break
-            endif
-        endfor
-	else
-		let l:ret = filter(range(1, bufnr('$')), 'buflisted(v:val)')
-        for l:buf in l:ret
-            if bufname(l:buf) !=# expand('%:p')
-                let l:i=l:i+1
-            else
-                break
-            endif
-        endfor
-	endif
-    return l:i
-endfunction
-
 let s:lastopen_tab=1
-let s:lastopen_buf=1
 augroup Tabpage
     autocmd!
     autocmd TabLeave * let s:lastopen_tab=tabpagenr()
-    autocmd BufLeave * let s:lastopen_buf=s:get_listed_buf_order_num()
 augroup end
 
 "Return the total number of listed buffers
@@ -326,7 +300,7 @@ function! te#utils#tab_buf_switch(num) abort
             if exists( '*tabpagenr' ) && tabpagenr('$') != 1
                 execute 'normal '."\<Plug>AirlineSelectTab".s:lastopen_tab
             else
-                execute 'normal '."\<Plug>AirlineSelectTab".s:lastopen_buf
+                :b#
             endif
         else
             if tabpagenr('$') != 1 && a:num > tabpagenr('$')
@@ -352,7 +326,7 @@ function! te#utils#tab_buf_switch(num) abort
             elseif a:num == -1
                 :bnext
             elseif a:num == -2
-                execute 'normal '."\<Plug>BufTabLine.Go(".s:lastopen_buf.')'
+                :b#
             else
                 execute 'normal '."\<Plug>BufTabLine.Go(".a:num.')'
             endif
@@ -362,6 +336,9 @@ function! te#utils#tab_buf_switch(num) abort
                 return
             elseif a:num == -1
                 :bnext
+                return
+            elseif a:num == -2
+                :b#
                 return
             endif
         endif
