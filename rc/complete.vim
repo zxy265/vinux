@@ -67,6 +67,8 @@ if g:complete_plugin_type.cur_val ==# 'YouCompleteMe'
     function! s:enable_ycm()
         if te#pg#top_of_kernel_tree()
             let g:ycm_global_ycm_extra_conf = $VIMFILES.'/rc/ycm_conf_for_arm_linux.py'
+        elseif te#pg#top_of_uboot_tree()
+            let g:ycm_global_ycm_extra_conf = $VIMFILES.'/rc/ycm_conf_for_uboot.py'
         endif
         call delete('.ycm_extra_conf.pyc')  | call youcompleteme#Enable() 
     endfunction

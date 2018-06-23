@@ -29,6 +29,18 @@ function! te#pg#add_cscope_out(read_project,...) abort
     endif
 endfunction
 
+function! te#pg#top_of_uboot_tree() abort
+    let l:tree_check= ["include/asm-generic/u-boot.h", "CREDITS", "Kbuild", "Makefile",
+                \ "README", "arch", "include", "drivers",
+                \ "fs","lib", "scripts"]
+    for l:needle in l:tree_check
+        if !isdirectory(l:needle) && !filereadable(l:needle)
+            return 0
+        endif
+    endfor
+    return 1
+endfunction
+
 function! te#pg#top_of_kernel_tree() abort
     let l:tree_check= ["COPYING", "CREDITS", "Kbuild", "MAINTAINERS", "Makefile",
                 \ "README", "Documentation", "arch", "include", "drivers",
