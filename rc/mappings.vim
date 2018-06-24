@@ -336,7 +336,7 @@ elseif te#env#SupportTerminal()
     call te#meta#map('tmap <silent> ','j',te#env#get_termwinkey().'j')
     call te#meta#map('tmap <silent> ','k',te#env#get_termwinkey().'k')
     call te#meta#map('tmap <silent> ','l',te#env#get_termwinkey().'l')
-    silent! execute 'tmap <c-v> '.&termkey.'"*'
+    silent! execute 'tnoremap <c-v> '.te#env#get_termwinkey().'"*'
     call te#meta#map('tnoremap <silent> ','b','<C-left>')
     call te#meta#map('tnoremap <silent> ','f','<C-right>')
 endif
