@@ -51,7 +51,7 @@ augroup filetype_group
                 \ | call te#plug#extra_key()
 augroup END
 if te#env#IsNvim()
-    autocmd misc_group TermOpen * setlocal nonu signcolumn=no | :startinsert
+    autocmd misc_group TermOpen * setlocal nonu nornu signcolumn=no | :startinsert
     "auto close terminal buffer
     autocmd misc_group TermClose * exe expand('<abuf>').'bd!'
     if exists('+winhighlight')

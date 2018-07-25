@@ -17,4 +17,10 @@ nnoremap <buffer><silent> <Enter> :call te#complete#goto_def("")<cr>
 if te#env#Executable('yapf')
     nnoremap <buffer><leader>cf :0,$!yapf<CR>
     vnoremap <buffer><leader>cf :!yapf<CR>
+elseif te#env#Executable('autopep8')
+    nnoremap <buffer><leader>cf :%!autopep8 -<CR>
+    vnoremap <buffer><leader>cf :!autopep8 -<CR>
+else
+    nnoremap <buffer><leader>cf :call te#utils#EchoWarning("Please install yapf or autopep8")<cr>
+    vnoremap <buffer><leader>cf :call te#utils#EchoWarning("Please install yapf or autopep8")<cr>
 endif

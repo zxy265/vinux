@@ -77,8 +77,6 @@ function! Airline_setting()
       let g:airline_section_b = airline#section#create_left([g:airline_symbols.branch.' '.gina#component#repo#branch()])
   endif
 endfunction
-"https://github.com/vim-airline/vim-airline/issues/399
-autocmd misc_group BufDelete * call airline#extensions#tabline#buflist#invalidate()
 
 call te#feat#register_vim_enter_setting(function('Airline_setting'))
 " }}}
