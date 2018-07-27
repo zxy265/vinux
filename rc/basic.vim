@@ -50,8 +50,12 @@ if te#env#IsVim8() || te#env#IsNvim()
     Plug 'tracyone/neomake-multiprocess'
     "ag search c family function
     nnoremap <leader>vf :call neomakemp#global_search(expand("<cword>") . "\\s*\\([^()]*\\)\\s*[^;]")<cr>
-    "set grepprg=ag\ --nogroup\ --nocolor
-    "set grepformat=%f:%l:%c%m
+    function! Neomake_setting()
+        call neomake#configure#automake('nrwi', 500)
+        let g:neomake_vim_enabled_makers = []
+        let g:neomake_c_enabled_makers = []
+    endfunction
+    call te#feat#register_vim_enter_setting(function('Neomake_setting'))
 else
     let g:grepper_plugin.cur_val = 'vim-easygrep'
 endif

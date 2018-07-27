@@ -31,15 +31,6 @@ augroup filetype_group
     autocmd BufRead,BufNewFile *.hex,*.out,*.o,*.a Vinarise
     autocmd BufRead,BufNewFile *.fex setlocal filetype=dosini
 
-    autocmd FileType qf noremap <buffer> r :<C-u>:q<cr>:silent! Qfreplace<CR> 
-                \ | noremap <buffer> <c-x> <C-w><Enter><C-w>K
-                \ | nnoremap <buffer> q :ccl<cr>:lcl<cr>
-                \ | nnoremap <buffer> o <CR><C-w>p
-                \ | nnoremap <buffer> <c-j> <CR><C-w>p
-                \ | nnoremap <buffer> <c-t> <C-w><CR><C-w>T
-                \ | nnoremap <buffer> <c-v> <C-w><CR><C-w>L<C-w>p<C-w>J<C-w>p
-                \ | nnoremap <buffer> <c-o> :silent! colder<cr>
-                \ | nnoremap <buffer> <c-i> :silent! cnewer<cr>
     " quickfix window  s/v to open in split window,  ,gd/,jd => quickfix window => open it
     autocmd FileType gitcommit,gina-status,gina-commit setlocal nofoldenable cursorline
     autocmd FileType qfreplace,vimcalc,man setlocal nonu nornu nofoldenable | imap <buffer> <c-d> :q<cr>
@@ -62,9 +53,6 @@ else
     if te#env#IsMacVim()
         autocmd misc_group FocusGained * :redraw!
     endif
-endif
-if get(g:, 'feat_enable_basic') && te#env#SupportAsync()
-    autocmd filetype_group BufWritePost,BufEnter *.php,*.sh,*.js Neomake
 endif
 
 
