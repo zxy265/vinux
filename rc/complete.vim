@@ -86,6 +86,9 @@ if g:complete_plugin_type.cur_val ==# 'YouCompleteMe'
     "imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
     "smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
     "imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+
+    let g:ycm_warning_symbol = '!'
+    let g:ycm_error_symbol = '>>'
     let g:ycm_key_detailed_diagnostics = '<leader>ys'
     let g:ycm_autoclose_preview_window_after_insertion = 1
     let g:ycm_complete_in_comments = 1

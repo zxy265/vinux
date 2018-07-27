@@ -51,9 +51,22 @@ if te#env#IsVim8() || te#env#IsNvim()
     "ag search c family function
     nnoremap <leader>vf :call neomakemp#global_search(expand("<cword>") . "\\s*\\([^()]*\\)\\s*[^;]")<cr>
     function! Neomake_setting()
-        call neomake#configure#automake('nrwi', 500)
+        silent! call neomake#configure#automake('nrwi', 500)
         let g:neomake_vim_enabled_makers = []
         let g:neomake_c_enabled_makers = []
+        nnoremap <Leader>sc :Neomake<cr>
+        "let g:neomake_open_list=2
+        if !te#env#IsGui()
+            let g:neomake_info_sign = {'text': 'i', 'texthl': 'NeomakeInfoSign'}
+            let g:neomake_warning_sign = {
+                        \ 'text': '!',
+                        \ 'texthl': 'WarningMsg',
+                        \ }
+            let g:neomake_error_sign = {
+                        \ 'text': '>>',
+                        \ 'texthl': 'ErrorMsg',
+                        \ }
+        endif
     endfunction
     call te#feat#register_vim_enter_setting(function('Neomake_setting'))
 else
@@ -228,19 +241,6 @@ if te#env#SupportAsync()
 endif
 " Save basic setting
 nnoremap <Leader>lo :Love<cr>
-nnoremap <Leader>sc :Neomake<cr>
-"let g:neomake_open_list=2
-if !te#env#IsGui()
-    let g:neomake_info_sign = {'text': 'i', 'texthl': 'NeomakeInfoSign'}
-    let g:neomake_warning_sign = {
-                \ 'text': 'W',
-                \ 'texthl': 'WarningMsg',
-                \ }
-    let g:neomake_error_sign = {
-                \ 'text': 'E',
-                \ 'texthl': 'ErrorMsg',
-                \ }
-endif
 
 if g:enable_sexy_mode.cur_val ==# 'on'
     function! SexyCommnad()
