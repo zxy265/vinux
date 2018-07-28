@@ -52,7 +52,9 @@ if te#env#IsVim8() || te#env#IsNvim()
     nnoremap <leader>vf :call neomakemp#global_search(expand("<cword>") . "\\s*\\([^()]*\\)\\s*[^;]")<cr>
     function! Neomake_setting()
         silent! call neomake#configure#automake('nrwi', 500)
-        let g:neomake_vim_enabled_makers = []
+        "disable linter of specified filetype by setting
+        "g:neomake_ft_enabled_makers=[]
+        "let g:neomake_vim_enabled_makers = []
         let g:neomake_c_enabled_makers = []
         nnoremap <Leader>sc :Neomake<cr>
         "let g:neomake_open_list=2
