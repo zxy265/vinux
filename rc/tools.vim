@@ -34,14 +34,14 @@ endif
 let g:fencview_autodetect=0 
 let g:fencview_auto_patterns='*.txt,*.htm{l\=},*.c,*.cpp,*.s,*.vim'
 function! FencToggle()
-    if &fenc ==# 'utf-8'
+    if &fileencoding ==# 'utf-8'
         FencManualEncoding cp936
         call te#utils#EchoWarning('Chang encode to cp936')
-    elseif &fenc ==# 'cp936'
+    elseif &fileencoding ==# 'cp936'
         FencManualEncoding utf-8
         call te#utils#EchoWarning('Chang encode to utf-8')
     else
-        call te#utils#EchoWarning('Current file encoding is '.&fenc)
+        call te#utils#EchoWarning('Current file encoding is '.&fileencoding)
     endif
 endfunction
 " Convert file's encode

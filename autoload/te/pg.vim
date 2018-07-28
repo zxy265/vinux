@@ -30,9 +30,9 @@ function! te#pg#add_cscope_out(read_project,...) abort
 endfunction
 
 function! te#pg#top_of_uboot_tree() abort
-    let l:tree_check= ["include/asm-generic/u-boot.h", "CREDITS", "Kbuild", "Makefile",
-                \ "README", "arch", "include", "drivers",
-                \ "fs","lib", "scripts"]
+    let l:tree_check= ['include/asm-generic/u-boot.h', 'CREDITS', 'Kbuild', 'Makefile',
+                \ 'README', 'arch', 'include', 'drivers',
+                \ 'fs','lib', 'scripts']
     for l:needle in l:tree_check
         if !isdirectory(l:needle) && !filereadable(l:needle)
             return 0
@@ -42,9 +42,9 @@ function! te#pg#top_of_uboot_tree() abort
 endfunction
 
 function! te#pg#top_of_kernel_tree() abort
-    let l:tree_check= ["COPYING", "CREDITS", "Kbuild", "MAINTAINERS", "Makefile",
-                \ "README", "Documentation", "arch", "include", "drivers",
-                \ "fs", "init", "ipc", "kernel", "lib", "scripts"]
+    let l:tree_check= ['COPYING', 'CREDITS', 'Kbuild', 'MAINTAINERS', 'Makefile',
+                \ 'README', 'Documentation', 'arch', 'include', 'drivers',
+                \ 'fs', 'init', 'ipc', 'kernel', 'lib', 'scripts']
     for l:needle in l:tree_check
         if !isdirectory(l:needle) && !filereadable(l:needle)
             return 0
@@ -56,7 +56,7 @@ endfunction
 function! te#pg#gen_cscope_kernel(timerid) abort
     if !te#pg#top_of_kernel_tree()
         call te#pg#gen_cs_out()
-        call te#utils#EchoWarning("Current directory is not in the top level of kernel tree")
+        call te#utils#EchoWarning('Current directory is not in the top level of kernel tree')
     else
         :silent! call delete('cctree.out')
         if &cscopeprg ==# 'gtags-cscope'
@@ -115,16 +115,16 @@ function! te#pg#do_cs_tags(dir, option) abort
             endif
         endif
         if(executable('ctags'))
-            if &ft ==# 'cpp'
+            if &filetype ==# 'cpp'
                 call te#utils#run_command('ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .')
-            elseif &ft ==# 'c'
+            elseif &filetype ==# 'c'
                 call te#utils#run_command('ctags -R --c-types=+p --fields=+S *')
             else
                 call te#utils#run_command('ctags -R *')
             endif
         endif
     endif
-    if !and(a:option, 0x02) || (&ft !=# 'c' && &ft !=# 'cpp')
+    if !and(a:option, 0x02) || (&filetype !=# 'c' && &filetype !=# 'cpp')
         return
     endif
     if filereadable(l:cscopefiles)
@@ -168,7 +168,7 @@ endfunction
 
 
 "make 
-function! te#pg#do_make()
+function! te#pg#do_make() abort
     :call te#utils#EchoWarning('making ...')
     :wa
     if empty(glob('makefile')) && empty(glob('Makefile'))

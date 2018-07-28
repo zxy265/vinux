@@ -60,7 +60,7 @@ elseif g:fuzzysearcher_plugin_name.cur_val ==# 'denite.nvim' && te#env#SupportPy
     nnoremap <Leader>pf :call denite#start([{'name': 'grep', 'args': ['', '', '!']}])<cr>
 else
     "fallback to ctrlp
-    let g:fuzzysearcher_plugin_name.cur_val = "ctrlp"
+    let g:fuzzysearcher_plugin_name.cur_val = 'ctrlp'
     Plug 'ctrlpvim/ctrlp.vim',{'commit':'35c9b961c916e4370f97cb74a0ba57435a3dbc25'}
     Plug 'tacahiroy/ctrlp-funky',{'on': 'CtrlPFunky'}
     Plug 'fisadev/vim-ctrlp-cmdpalette',{'on': 'CtrlPCmdPalette'}
@@ -89,7 +89,7 @@ else
     " stupid that it's not default
     let g:ctrlp_match_window_reversed = 0
     let g:ctrlp_max_files = 70000
-    let g:ctrlp_search_hidden=""
+    let g:ctrlp_search_hidden=''
 
     " Tell Ctrl-P to keep the current VIM working directory when starting a
     " search, another really stupid non default
@@ -216,8 +216,8 @@ autocmd filetype_group FileType qf nmap <buffer> <Space><Space>  <plug>(quickr_p
 "extend %
 runtime macros/matchit.vim "important 
 let b:match_ignorecase=1 
-set mps+=<:>
-set mps+=":"
+set matchpairs+=<:>
+set matchpairs+=":"
 "}}}
 " Easymotion {{{
 map W <Plug>(easymotion-lineforward)

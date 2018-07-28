@@ -9,11 +9,11 @@ function! te#plug#open_doc() abort
         for doc in split(globpath(g:plugs[name].dir, 'doc/*.txt'), '\n')
             let l:found=1
             execute 'tabe' doc
-            setlocal ft=help
+            setlocal filetype=help
         endfor
     endif
     if l:found == 0
-        call te#utils#EchoWarning("Can not find ".name."'s document")
+        call te#utils#EchoWarning('Can not find '.name."'s document")
     endif
 endfunction
 
@@ -38,7 +38,7 @@ function! te#plug#browse_plugin_url() abort
     let name = empty(sha) ? matchstr(line, '^[-x+] \zs[^:]\+\ze:')
                 \ : getline(search('^- .*:$', 'bn'))[2:-2]
     let uri  = get(get(g:plugs, name, {}), 'uri', '')
-    if uri !~ 'github.com'
+    if uri !~# 'github.com'
         return
     endif
     let repo = matchstr(uri, 'github.com/\zs.*'.name)
@@ -48,7 +48,7 @@ function! te#plug#browse_plugin_url() abort
 endfunction
 
 
-function! s:scroll_preview(down)
+function! s:scroll_preview(down) abort
   silent! wincmd P
   if &previewwindow
     execute 'normal!' a:down ? "\<c-e>" : "\<c-y>"
@@ -67,7 +67,7 @@ function! te#plug#extra_key() abort
     nmap <silent> <buffer> <c-k> <c-p>o
 endfunction
 
-function! s:syntax()
+function! s:syntax() abort
   syntax clear
   syntax region plug1 start=/\%1l/ end=/\%2l/ contains=plugNumber
   syntax region plug2 start=/\%2l/ end=/\%3l/ contains=plugBracket,plugX
@@ -101,7 +101,7 @@ function! te#plug#list() abort
     let l:i=3
 
     for l:needle in g:plugs_order
-        call add(l:output, printf("- %s:%s", l:needle,' ('.g:plugs[l:needle].uri.')' ) )
+        call add(l:output, printf('- %s:%s', l:needle,' ('.g:plugs[l:needle].uri.')' ) )
         let l:i=l:i + 1
     endfor
     let l:output[0].=l:i-3

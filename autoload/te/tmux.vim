@@ -11,7 +11,7 @@ function! s:reg2tmux(reg) abort
 endfunction
 
 function! s:tmux2reg() abort
-        let args = "show-buffer"
+        let args = 'show-buffer'
         let @" = s:run_tmux(args)
 endfunction
 
@@ -48,7 +48,7 @@ function! te#tmux#rename_win(name) abort
     if a:name !=# ''
         let l:name = a:name
     else
-        let l:name=input("Input the name of current windows: ")
+        let l:name=input('Input the name of current windows: ')
     endif
     call te#utils#run_command('tmux rename-window '.l:name)
 endfunction

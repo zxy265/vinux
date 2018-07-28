@@ -10,11 +10,11 @@ function! te#compatiable#writefile(list, fname,...) abort
         endif
     else
         if type(a:list) != g:t_list
-            call te#utils#EchoWarning("Not a list", 'err')
+            call te#utils#EchoWarning('Not a list', 'err')
             return
         endif
         if type(a:fname) != g:t_string
-            call te#utils#EchoWarning("Not a string", 'err')
+            call te#utils#EchoWarning('Not a string', 'err')
             return
         endif
         let l:fcontents=[]
@@ -29,7 +29,7 @@ function! te#compatiable#writefile(list, fname,...) abort
 endfunction
 
 "systemlist compatiable function.
-function! te#compatiable#systemlist(expr, ...)
+function! te#compatiable#systemlist(expr, ...) abort
     if exists('*systemlist') && !te#env#IsWindows()
         if a:0 == 1
             return systemlist(a:expr, a:1)

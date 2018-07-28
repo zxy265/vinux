@@ -3,7 +3,7 @@ let s:base_cmd = 'trans -no-ansi -no-auto -no-warn -brief'
 
 function! te#trans#translate(source_target) abort
     if !s:check_executable() | return | endif
-    call te#utils#run_command(s:base_cmd . ' ' . a:source_target.' -i '.expand("%:p"),1)
+    call te#utils#run_command(s:base_cmd . ' ' . a:source_target.' -i '.expand('%:p'),1)
 endfunction
 
 function! te#trans#replace(source_target) abort

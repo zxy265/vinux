@@ -5,7 +5,7 @@
 " This function should not be called twice!
 
 let s:flag = 0
-function! te#server#connect()
+function! te#server#connect() abort
     "start server one time
     "no need to start server in gvim
     if s:flag == 0 && !te#env#IsGui()
@@ -46,7 +46,7 @@ function! te#server#connect()
     endif
 endfunction
 
-function! te#server#list()
+function! te#server#list() abort
     if has('nvim')
         return join(serverlist(), "\n")
     else

@@ -39,7 +39,7 @@ elseif g:complete_plugin_type.cur_val ==# 'deoplete.nvim'
     endif
 else
     let g:complete_plugin_type.cur_val='supertab'
-    let g:complete_plugin.name=["supertab"]
+    let g:complete_plugin.name=['supertab']
     Plug 'ervandew/supertab', { 'on': [] }
 endif
 Plug 'tracyone/snippets', { 'on': [] }
@@ -250,7 +250,7 @@ elseif g:complete_plugin_type.cur_val ==# 'asyncomplete.vim'
                     \ }))
     endfunction
     if executable('clangd')
-        au User lsp_setup call lsp#register_server({
+        au misc_group User lsp_setup call lsp#register_server({
                     \ 'name': 'clangd',
                     \ 'cmd': {server_info->['clangd']},
                     \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
@@ -259,7 +259,7 @@ elseif g:complete_plugin_type.cur_val ==# 'asyncomplete.vim'
     let g:complete_plugin.enable_func=function('<SID>asyncomplete_setup')
     function! s:check_back_space() abort
         let col = col('.') - 1
-        return !col || getline('.')[col - 1]  =~ '\s'
+        return !col || getline('.')[col - 1]  =~# '\s'
     endfunction
 
     inoremap <silent><expr> <TAB>
@@ -307,13 +307,13 @@ else
     let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
     function! Supertab_change_complete_type()
         if &omnifunc ==# '' && &completefunc ==# ''
-            call SuperTabSetDefaultCompletionType("<c-p>")
+            call SuperTabSetDefaultCompletionType('<c-p>')
         elseif &omnifunc !=# ''
-            call SuperTabSetDefaultCompletionType("<c-x><c-o>")
-            call SuperTabChain(&omnifunc, "<c-p>") |
+            call SuperTabSetDefaultCompletionType('<c-x><c-o>')
+            call SuperTabChain(&omnifunc, '<c-p>') |
         elseif &completefunc !=# ''
-            call SuperTabSetDefaultCompletionType("<c-x><c-u>")
-            call SuperTabChain(&completefunc, "<c-p>") |
+            call SuperTabSetDefaultCompletionType('<c-x><c-u>')
+            call SuperTabChain(&completefunc, '<c-p>') |
         endif
     endfunction
     let g:complete_plugin.enable_func=function('Supertab_change_complete_type')

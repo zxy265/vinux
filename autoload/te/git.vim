@@ -31,7 +31,7 @@ function! te#git#get_status() abort
     endfor
     let l:temp=l:result.untracked.l:result.modify.l:result.staged
     if !empty(l:temp)
-        let l:temp=" ".l:result.untracked.l:result.modify.l:result.staged
+        let l:temp=' '.l:result.untracked.l:result.modify.l:result.staged
     endif
     return l:temp
 endfunction
@@ -188,7 +188,7 @@ function! te#git#show_log(dir) abort
     return 1
 endfunction
 
-function! te#git#git_browse()
+function! te#git#git_browse() abort
     let l:remote_name=s:get_remote_name()
     if type(l:remote_name) != g:t_string
         return
@@ -201,14 +201,14 @@ function! te#git#git_browse()
         let l:wrong_url = matchstr(l:remote_url[0], 'git@\zs.*\ze:.*')
         if l:wrong_url !=# '' 
             let l:wrong_url_reset = matchstr(l:remote_url[0], ':\zs.*\ze$')
-            if l:wrong_url_reset !=# ""
-                call te#utils#open_url("https://".l:wrong_url.'/'.l:wrong_url_reset)
+            if l:wrong_url_reset !=# ''
+                call te#utils#open_url('https://'.l:wrong_url.'/'.l:wrong_url_reset)
                 return
             endif
         endif
         let l:wrong_url = matchstr(l:remote_url[0], '\v(git://|ssh://)\zs.*\ze.*')
         if l:wrong_url !=# ''
-            call te#utils#open_url("https://".l:wrong_url)
+            call te#utils#open_url('https://'.l:wrong_url)
             return
         endif
         call te#utils#EchoWarning('Can not recognize url:', l:remote_url[0])

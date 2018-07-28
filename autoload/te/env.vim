@@ -128,7 +128,7 @@ function! te#env#check_requirement() abort
     if v:version > 703
         return 1
     elseif v:version ==# 703
-        return has("patch1058")
+        return has('patch1058')
     else
         return 0
     endif

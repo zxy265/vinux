@@ -46,8 +46,8 @@ if te#env#IsNvim()
     "auto close terminal buffer
     autocmd misc_group TermClose * exe expand('<abuf>').'bd!'
     if exists('+winhighlight')
-      autocmd BufEnter,FocusGained,TermClose * if te#autocmds#should_colorcolumn() | set winhighlight= | endif
-      autocmd FocusLost,WinLeave * if te#autocmds#should_colorcolumn() | set winhighlight=CursorLineNr:LineNr,IncSearch:ColorColumn,Normal:ColorColumn,NormalNC:ColorColumn,SignColumn:ColorColumn | endif
+      autocmd misc_group BufEnter,FocusGained,TermClose * if te#autocmds#should_colorcolumn() | set winhighlight= | endif
+      autocmd misc_group FocusLost,WinLeave * if te#autocmds#should_colorcolumn() | set winhighlight=CursorLineNr:LineNr,IncSearch:ColorColumn,Normal:ColorColumn,NormalNC:ColorColumn,SignColumn:ColorColumn | endif
     endif
 else
     if te#env#IsMacVim()

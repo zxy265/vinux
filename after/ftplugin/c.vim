@@ -1,5 +1,5 @@
 "avoid source twice
-if exists("b:did_vinux_ftplugin") 
+if exists('b:did_vinux_ftplugin') 
     finish
 endif
 let b:did_vinux_ftplugin = 1
@@ -10,10 +10,10 @@ endif
 
 " add cscope database at the first time
 if get(g:,'tagging_program').cur_val ==# 'gtags'
-    set csprg=gtags-cscope
+    set cscopeprg=gtags-cscope
     :call te#pg#add_cscope_out(1,'.',1)
 else
-    set csprg=cscope
+    set cscopeprg=cscope
     :call te#pg#add_cscope_out(1)
 endif
 
@@ -21,7 +21,7 @@ endif
 set cscopetag
 " check cscope for definition of a symbol before checking ctags: set to 1
 " if you want the reverse search order.
-set csto=0
+set cscopetagorder=0
 set cscopequickfix=s-,c-,d-,i-,t-,e-,i-,g-,f-
 " add any cscope database in current directory
 " else add the database pointed to by environment variable 
@@ -104,7 +104,7 @@ let b:match_words=
 \ '\%(\<else\s\+\)\@<!\<if\>:\<else\s\+if\>:\<else\%(\s\+if\)\@!\>,' .
 \ '\<switch\>:\<case\>:\<default\>'
 
-if !exists("g:vinux_auto_gen_cscope") 
+if !exists('g:vinux_auto_gen_cscope') 
     if te#env#SupportTimer() &&
                 \ (te#env#IsTmux() || te#env#SupportAsync())
         if te#pg#top_of_kernel_tree() || te#pg#top_of_uboot_tree()

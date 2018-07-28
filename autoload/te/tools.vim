@@ -39,7 +39,7 @@ function! te#tools#shell_pop(option) abort
     endif
 endfunction
 "put message from vim command to + register
-function! te#tools#vim_get_message()
+function! te#tools#vim_get_message() abort
     let l:command=input('Input command: ')
     if l:command !=# ''
         execute ':redir @+> | silent '.l:command.' | redir END'
@@ -75,7 +75,7 @@ function! te#tools#max_win() abort
 endfunction
 
 function! te#tools#buf_only(buffer, bang) abort
-	if a:buffer == ''
+	if a:buffer ==# ''
 		" No l:buffer provided, use the current l:buffer.
 		let l:buffer = bufnr('%')
 	elseif (a:buffer + 0) > 0
@@ -87,7 +87,7 @@ function! te#tools#buf_only(buffer, bang) abort
 	endif
 
 	if l:buffer == -1
-        call te#utils#EchoWarning("No matching l:buffer for" a:buffer, 'err')
+        call te#utils#EchoWarning('No matching l:buffer for '.a:buffer, 'err')
 		return
 	endif
 
@@ -97,7 +97,7 @@ function! te#tools#buf_only(buffer, bang) abort
 	let l:n = 1
 	while l:n <= l:last_buffer
 		if l:n != l:buffer && buflisted(l:n)
-			if a:bang == '' && getbufvar(l:n, '&modified')
+			if a:bang ==# '' && getbufvar(l:n, '&modified')
                 call te#utils#EchoWarning('No write since last change for l:buffer (add ! to override)', 'err')
 			else
 				silent exe 'bdel' . a:bang . ' ' . l:n
@@ -109,11 +109,11 @@ function! te#tools#buf_only(buffer, bang) abort
 		let l:n = l:n+1
 	endwhile
 
-    call te#utils#EchoWarning(l:delete_count." buffers deleted")
+    call te#utils#EchoWarning(l:delete_count.' buffers deleted')
 endfunction
 
 " 0:up, 1:down, 2:pgup, 3:pgdown, 4:top, 5:bottom
-function! te#tools#PreviousCursor(mode)
+function! te#tools#PreviousCursor(mode) abort
 	if winnr('$') <= 1
 		return
 	endif
@@ -123,9 +123,9 @@ function! te#tools#PreviousCursor(mode)
 	elseif a:mode == 1
 		exec "normal! \<c-e>"
 	elseif a:mode == 2
-		exec "normal! ".winheight('.')."\<c-y>"
+		exec 'normal! '.winheight('.')."\<c-y>"
 	elseif a:mode == 3
-		exec "normal! ".winheight('.')."\<c-e>"
+		exec 'normal! '.winheight('.')."\<c-e>"
 	elseif a:mode == 4
 		normal! gg
 	elseif a:mode == 5
@@ -135,9 +135,9 @@ function! te#tools#PreviousCursor(mode)
 	elseif a:mode == 7
 		exec "normal! \<c-d>"
 	elseif a:mode == 8
-		exec "normal! k"
+		exec 'normal! k'
 	elseif a:mode == 9
-		exec "normal! j"
+		exec 'normal! j'
 	endif
 	noautocmd silent! wincmd p
 endfunction

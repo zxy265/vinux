@@ -51,7 +51,7 @@ function! te#utils#EchoWarning(str,...) abort
     endif
 endfunction
 
-function! te#utils#echo_info_after()
+function! te#utils#echo_info_after() abort
     if !empty(s:global_echo_str)
         for l:needle in s:global_echo_str
             call te#utils#EchoWarning(l:needle, 'warn')
@@ -140,7 +140,7 @@ function! te#utils#goto_cur_file(option) abort
     if a:option == 1
         execute 'cd %:h'
     elseif a:option == 2
-        execute 'cd '. fnamemodify(resolve(expand("%")), ':p:h')
+        execute 'cd '. fnamemodify(resolve(expand('%')), ':p:h')
     else
         execute 'lcd %:h'
     endif
@@ -171,7 +171,7 @@ function! s:Get_pattern_at_cursor(pat) abort
 endfunction
 
 function! te#utils#open_url(url) abort
-    if a:url ==# ""
+    if a:url ==# ''
         let l:url = s:Get_pattern_at_cursor('\v(https?://|ftp://|file:/{3}|www\.)(\w|[.-])+(:\d+)?(/(\w|[~@#$%^&+=/.?:-])+)?')
     else
         let l:url = a:url
@@ -209,7 +209,7 @@ function! te#utils#find_mannel() abort
         return -1
     endif
     let l:cur_word=expand('<cword>')
-    if &ft ==# 'sh'
+    if &filetype ==# 'sh'
         let l:ret = te#utils#GetError(l:man_cmd.' '.l:cur_word,'\cno \(manual\|entry\).*')
     else
         let l:ret = te#utils#GetError(l:man_cmd.' 2 '.l:cur_word,'\cno \(manual\|entry\).*')
@@ -245,14 +245,14 @@ function! te#utils#has_listed_buffer() abort
 endfunction
 
 "Detect whether current buffer is listed or not
-function! te#utils#is_listed_buffer()
+function! te#utils#is_listed_buffer() abort
     return buflisted(bufnr('%'))
 endfunction
 
 " quit current split windows
-function! te#utils#quit_win(all)
+function! te#utils#quit_win(all) abort
     if a:all == 1
-        if (confirm("Quit Vim Vim Vim Vim Vim ?", "&Yes\n&No", 2)==1)
+        if (confirm('Quit Vim Vim Vim Vim Vim ?', "&Yes\n&No", 2)==1)
             :qa
         endif
         return
@@ -267,7 +267,7 @@ function! te#utils#quit_win(all)
             if !te#utils#is_listed_buffer() && l:no_of_listed_buffer == 1
                 :bdelete
             else
-                if (confirm("Quit Vim Vim Vim Vim Vim ?", "&Yes\n&No", 2)==1)
+                if (confirm('Quit Vim Vim Vim Vim Vim ?', "&Yes\n&No", 2)==1)
                     :quit
                 endif
             endif
@@ -352,8 +352,8 @@ function! te#utils#focus_coding() abort
         endif
         set laststatus=0
         set showtabline=0
-        set nonu
-        set nornu
+        set nonumber
+        set norelativenumber
         set signcolumn=no
         let g:buftabline_show=0
     else
@@ -362,8 +362,8 @@ function! te#utils#focus_coding() abort
         endif
         set laststatus=2
         set showtabline=1
-        set nu
-        set rnu
+        set number
+        set relativenumber
         set signcolumn=yes
         let g:buftabline_show=1
     endif
@@ -383,7 +383,7 @@ function! te#utils#check_health() abort
     call add(l:output, printf("%s:\t",'Vim version'))
     let l:temp=te#feat#get_vim_version()
     let l:output[l:i].=l:temp[0].' '.l:temp[1]
-    let l:output[l:i].=" OS: "
+    let l:output[l:i].=' OS: '
     if te#env#IsMac()
         let l:output[l:i].='MacOS'
     elseif te#env#IsUnix()
@@ -397,14 +397,14 @@ function! te#utils#check_health() abort
     call add(l:output, '')
     let l:i=l:i + 1
 
-    call add(l:output, printf("%26s:\t", "vim >= 7.3.1058"))
+    call add(l:output, printf("%26s:\t", 'vim >= 7.3.1058'))
     let l:i=l:i + 1
     if te#env#check_requirement()
         let l:output[l:i].='Yes'
     else
         let l:output[l:i].='[No]'
     endif
-    call add(l:output, printf("%26s", "--------------------------------------------"))
+    call add(l:output, printf('%26s', '--------------------------------------------'))
     let l:i=l:i + 1
 
 
@@ -418,7 +418,7 @@ function! te#utils#check_health() abort
         else
             let l:output[l:i].='[No]'
         endif
-        call add(l:output, printf("%26s", "--------------------------------------------"))
+        call add(l:output, printf('%26s', '--------------------------------------------'))
         let l:i=l:i + 1
     endfor
 
@@ -429,7 +429,7 @@ function! te#utils#check_health() abort
     else
         let l:output[l:i].='[No]'
     endif
-    call add(l:output, printf("%26s", "--------------------------------------------"))
+    call add(l:output, printf('%26s', '--------------------------------------------'))
     let l:i=l:i + 1
 
     call add(l:output, printf("%26s:\t",'job support'))
@@ -439,7 +439,7 @@ function! te#utils#check_health() abort
     else
         let l:output[l:i].='[No]'
     endif
-    call add(l:output, printf("%26s", "--------------------------------------------"))
+    call add(l:output, printf('%26s', '--------------------------------------------'))
     let l:i=l:i + 1
 
 
@@ -450,7 +450,7 @@ function! te#utils#check_health() abort
     else
         let l:output[l:i].='[No]'
     endif
-    call add(l:output, printf("%26s", "--------------------------------------------"))
+    call add(l:output, printf('%26s', '--------------------------------------------'))
     let l:i=l:i + 1
 
     for needle in ['cscope', 'ctags', 'ag', 'rg', 'git', 'gtags',
@@ -462,7 +462,7 @@ function! te#utils#check_health() abort
         else
             let l:output[l:i].='[No]'
         endif
-        call add(l:output, printf("%26s", "--------------------------------------------"))
+        call add(l:output, printf('%26s', '--------------------------------------------'))
         let l:i=l:i + 1
     endfor
 
@@ -471,14 +471,14 @@ function! te#utils#check_health() abort
     setlocal nomodifiable
     setlocal bufhidden=delete
     highlight health ctermbg=red guibg=red
-    call matchadd("health", ".*No.*")
+    call matchadd('health', '.*No.*')
     :f [Health]
 endfunction
 
 "te#utils#run_command (command [, callback] [,arglist] [, flag)
 function! te#utils#run_command(command,...) abort
     if a:command =~# '^\s*$'
-        let l:command = input("Run command:",'','customlist,te#bashcomplete#cmd_complete')
+        let l:command = input('Run command:','','customlist,te#bashcomplete#cmd_complete')
     else
         let l:command=a:command
     endif
@@ -538,7 +538,7 @@ function! te#utils#get_plugin_name(A,L,P) abort
     return l:result
 endfunction
 
-function! te#utils#cd_to_plugin(path)
+function! te#utils#cd_to_plugin(path) abort
     execute 'cd '.a:path
     let l:plugin_name = input('Please input the direcory name: ','','custom,te#utils#get_plugin_name')
     if !isdirectory(l:plugin_name)

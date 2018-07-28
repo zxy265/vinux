@@ -30,7 +30,7 @@ set wildmode=longest,full
 set wildignore=*.swp,*.bak
 set wildignore+=*.min.*,*.css.map
 set wildignore+=*.jpg,*.png,*.gif
-set wic
+set wildignorecase
 "set list  "display unprintable characters by set list
 set listchars=tab:\|\ ,trail:-  "Strings to use in 'list' mode and for the |:list| command
 
@@ -54,7 +54,7 @@ set noerrorbells
 if te#env#IsVim8()
 set belloff=all
 endif
-set mat=2  
+set matchtime=2  
 set report=0  "Threshold for reporting number of lines changed
 set lazyredraw  " Don't update the display while executing macros
 set helplang=en,cn  "set helplang=en
@@ -91,7 +91,7 @@ set hlsearch "highlight all matches for the last used search pattern
 set noshowmode "display the current mode in the status line
 "set ruler  "show cursor position below each window
 set selection=inclusive  ""old", "inclusive" or "exclusive"; how selecting text behaves
-set is  "show match for partly typed search command
+set incsearch  "show match for partly typed search command
 "set lbr "wrap long lines at a character in 'breakat'
 set backspace=indent,eol,start  "specifies what <BS>, CTRL-W, etc. can do in Insert mode
 set whichwrap=b,h,l,<,>,[,]  "list of menu_flags specifying which commands wrap to another line
@@ -114,15 +114,15 @@ if get(g:,'feat_enable_basic') == 1
     if te#env#check_requirement()
         let s:function_name="%{exists(':TagbarToggle')?\ tagbar#currenttag('%s".s:seperator."'".",'')\ :\ ''}"
     else
-        let s:function_name="%{Tlist_Get_Tagname_By_Line()}".s:seperator
+        let s:function_name='%{Tlist_Get_Tagname_By_Line()}'.s:seperator
     endif
 else
-    let s:function_name=""
+    let s:function_name=''
 endif
 
 if get(g:,'feat_enable_git') == 1
     if g:git_plugin_name.cur_val ==# 'gina.vim'
-        let s:git_branch="[%{gina#component#repo#branch()}]%= "
+        let s:git_branch='[%{gina#component#repo#branch()}]%= '
     else
         let s:git_branch="%{exists('*fugitive#statusline')?\ fugitive#statusline()\ :\ ''}%= "
     endif
@@ -156,12 +156,12 @@ if get(g:,'feat_enable_airline') != 1
         if a:type == 1
             let l:mystatus_line.=s:git_branch
             let l:mystatus_line.=s:function_name
-            let l:mystatus_line.="%{&ft}".s:seperator."%{(&fenc!=''?&fenc:&enc)}[%{&ff}]".s:seperator."%p%%[%l,%v]"
+            let l:mystatus_line.='%{&ft}'.s:seperator."%{(&fenc!=''?&fenc:&enc)}[%{&ff}]".s:seperator.'%p%%[%l,%v]'
             let l:mystatus_line.=s:seperator."%{strftime(\"%m/%d\-\%H:%M\")} "
         elseif a:type == 3
             "for win32 ctags make gvim slow...
             let l:mystatus_line.=s:git_branch
-            let l:mystatus_line.="%{&ft}".s:seperator."%{(&fenc!=''?&fenc:&enc)}[%{&ff}]".s:seperator."%p%%[%l,%v]"
+            let l:mystatus_line.='%{&ft}'.s:seperator."%{(&fenc!=''?&fenc:&enc)}[%{&ff}]".s:seperator.'%p%%[%l,%v]'
             let l:mystatus_line.=s:seperator."%{strftime(\"%m/%d\-\%H:%M\")} "
         endif
         if exists('*neomakemp#run_status') && neomakemp#run_status() !=# ''
@@ -178,10 +178,10 @@ endif
 set guitablabel=%N\ %t  "do not show dir in tab
 "0, 1 or 2; when to use a status line for the last window
 set laststatus=2 "always show status
-set stal=1  "always show the tabline
+set showtabline=1  "always show the tabline
 set sessionoptions-=folds
 set sessionoptions-=options
-set ffs=unix,dos,mac
+set fileformats=unix,dos,mac
 set diffopt=vertical
 set shortmess=filnxtToOI
 if te#env#IsNvim()

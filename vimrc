@@ -7,8 +7,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible
-let $MYVIMRC=fnamemodify(expand('<sfile>'), ":p")
-let $VIMFILES=fnamemodify(expand('<sfile>'), ":p:h")
+let $MYVIMRC=fnamemodify(expand('<sfile>'), ':p')
+let $VIMFILES=fnamemodify(expand('<sfile>'), ':p:h')
 set runtimepath^=$VIMFILES
 set runtimepath+=$VIMFILES/after
 if has('win64') || has('win32')
