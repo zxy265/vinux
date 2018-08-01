@@ -17,11 +17,7 @@ Plug 'itchyny/screensaver.vim'
 "config ...
 function! s:fun_setting()
     let g:screensaver_password = 1
-    try
-        let s:password=screensaver#random#number()
-    catch /^Vim\%((\a\+)\)\=:E117/
-        let s:password=0
-    endtry
+    let s:password=strftime('%Y%m%d')
     silent! call screensaver#source#password#set(sha256(s:password))
     nnoremap <Leader>ar :call EnterScreensaver(0)<cr>
 endfunction
@@ -56,7 +52,8 @@ function! EnterScreensaver(timer)
         call system('tmux set -g status off')
     endif
     call writefile(['rest'],$VIMFILES.'/.screenlock')
-    :ScreenSaver password
+    :ScreenSaver largeclock
+    call feedkeys("\<c-[>")
 endfunction
 
 function! s:clear_screen_flag()
