@@ -50,6 +50,7 @@ if te#env#IsVim8() || te#env#IsNvim()
     Plug 'tracyone/neomake-multiprocess'
     "ag search c family function
     nnoremap <leader>vf :call neomakemp#global_search(expand("<cword>") . "\\s*\\([^()]*\\)\\s*[^;]")<cr>
+    nnoremap <leader>nm :call te#tools#get_enabler_linter()<cr>
     function! Neomake_setting()
         silent! call neomake#configure#automake('nrwi', 500)
         "disable linter of specified filetype by setting

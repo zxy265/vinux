@@ -141,3 +141,7 @@ function! te#tools#PreviousCursor(mode) abort
 	endif
 	noautocmd silent! wincmd p
 endfunction
+
+function! te#tools#get_enabler_linter() abort
+    execute 'echohl WarningMsg | echom "Available linter for ".&filetype.": ".string(neomake#makers#ft#'.&filetype.'#EnabledMakers()) | echohl None'
+endfunction
