@@ -119,7 +119,7 @@ nnoremap <leader>qf :botright copen<cr>
 "open location windows
 nnoremap <leader>ql :botright lopen<cr>
 nnoremap <leader>qc q:
-nnoremap <leader>qd q/
+nnoremap <leader>q/ q/
 
 "clear search result
 
