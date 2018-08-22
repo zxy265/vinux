@@ -22,6 +22,8 @@ bash -c "$(curl -fsSL https://git.io/vNDOQ)"
 
 本人linux内核驱动开发者，本配置可能不适合你的使用场景，我用本配置在linux源码这样规模的项目下来去自如，如鱼得水。
 
+欢迎加入[telegram讨论群](https://t.me/vimchina)，欢迎任何建议，需求以及求助。
+
 # Buy me a coffee
 
 请随便给点小费:
