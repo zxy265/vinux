@@ -143,5 +143,9 @@ function! te#tools#PreviousCursor(mode) abort
 endfunction
 
 function! te#tools#get_enabler_linter() abort
-    execute 'echohl WarningMsg | echom "Available linter for ".&filetype.": ".string(neomake#makers#ft#'.&filetype.'#EnabledMakers()) | echohl None'
+    if exists('*neomake#makers#ft#'.&filetype.'#EnabledMakers()')
+        execute 'echohl WarningMsg | echom "Available linter for ".&filetype.": ".string(neomake#makers#ft#'.&filetype.'#EnabledMakers()) | echohl None'
+    else
+        call te#utils#EchoWarning("Not support filetype: ".&filetype, 'err')
+    endif
 endfunction
