@@ -50,6 +50,9 @@ endfunction
 function! te#ctrlp#dir#start() abort
     if te#env#IsWindows()
         let s:text = te#compatiable#systemlist('dir /B /D')
+        if type(s:text) == g:t_number
+            return
+        endif
         let l:text_dir=filter(deepcopy(s:text),'isdirectory(v:val)')
         call filter(s:text,'isdirectory(v:val) == 0')
         call map(l:text_dir, 'v:val."\\"')
@@ -57,6 +60,9 @@ function! te#ctrlp#dir#start() abort
         call add(s:text, '..\')
     else
         let s:text = te#compatiable#systemlist('ls -a -F')
+        if type(s:text) == g:t_number
+            return
+        endif
     endif
     call ctrlp#init(te#ctrlp#dir#id()) 
 endfunction

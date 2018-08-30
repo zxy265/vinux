@@ -53,7 +53,15 @@ function! te#tools#update_vinux() abort
     if isdirectory('.git') && te#env#Executable('git')
         call te#utils#EchoWarning('Updating ...')
         let l:temp1=te#compatiable#systemlist('git rev-list --tags --max-count=1')
+        if type(l:temp1) == g:t_number
+            call te#utils#EchoWarning('git rev-list --tags --max-count=1 fail','err')
+            return ''
+        endif
         let l:temp2=te#compatiable#systemlist('git describe --tags '.l:temp1[0])
+        if type(l:temp2) == g:t_number
+            call te#utils#EchoWarning('git describe --tags '.l:temp1[0],'err')
+            return ''
+        endif
         call te#utils#run_command('git checkout '.l:temp2[0], function('te#feat#gen_feature_vim'), [0])
     else
         call te#utils#EchoWarning('Not a git repository or git not found!', 'err')

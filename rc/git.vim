@@ -212,6 +212,13 @@ else
     " Open github url
     nnoremap <Leader>gh :call te#git#git_browse()<cr>
 endif
+
+nnoremap gho :call te#git#browse_file(1)<cr>
+xmap gho :<c-u>call te#git#browse_file(3)<cr>
+
+nnoremap ghc :call te#git#browse_file(0)<cr>
+xmap ghc :<c-u>call te#git#browse_file(2)<cr>
+
 nnoremap <Leader>gl :call te#git#show_log(".")<cr>
 if te#env#SupportPy2()
     Plug 'jaxbot/github-issues.vim', { 'on': 'Gissue' }

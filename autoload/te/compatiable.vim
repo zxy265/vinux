@@ -32,15 +32,20 @@ endfunction
 function! te#compatiable#systemlist(expr, ...) abort
     if exists('*systemlist') && !te#env#IsWindows()
         if a:0 == 1
-            return systemlist(a:expr, a:1)
+            let l:res = systemlist(a:expr, a:1)
         else
-            return systemlist(a:expr)
+            let l:res =  systemlist(a:expr)
         endif
     else
         if a:0 == 1
-            return split(system(a:expr, a:1),nr2char(10))
+            let l:res = split(system(a:expr, a:1),nr2char(10))
         else
-            return split(system(a:expr),nr2char(10))
+            let l:res = split(system(a:expr),nr2char(10))
         endif
+    endif
+    if v:shell_error == 0
+        return l:res
+    else
+        return v:shell_error
     endif
 endfunction

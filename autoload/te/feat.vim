@@ -51,9 +51,13 @@ function! te#feat#gen_feature_vim(reset) abort
 	   call te#compatiable#writefile(['let '.l:key.'='.s:feature_dict[l:key]], $VIMFILES.'/feature.vim', 'a')
 	endfor
     let l:vinux_version=te#compatiable#systemlist('git describe')
+    if type(l:vinux_version) == g:t_number
+        call te#utils#EchoWarning("git describe fail", 'err')
+        return ''
+    endif
     let l:temp2=te#feat#get_vim_version()
     if v:shell_error != 0
-	    let g:vinux_version='vinux V1.3.3'.' @'.l:temp2[0].'.'.l:temp2[1]
+	    let g:vinux_version='vinux V1.3.4'.' @'.l:temp2[0].'.'.l:temp2[1]
     else
         let l:temp = matchstr(l:vinux_version[-1],'.*\(-\d\+-\w\+\)\@=')
         if  l:temp !=# ''

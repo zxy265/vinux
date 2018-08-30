@@ -3,6 +3,13 @@
 " return a space if no local branch found
 function! te#git#get_cur_br_name() abort
     let l:br=te#compatiable#systemlist('git branch')
+    if type(l:br) == g:t_number
+        return ''
+    endif
+    if type(l:br) == g:t_number
+        call te#utils#EchoWarning("Get current branch name fail!",'err')
+        return ''
+    endif
     for l:needle in l:br
         let l:needle=matchstr(needle, '^\*\s\+\zs.*\ze')
         if l:needle !=# ''
@@ -18,6 +25,9 @@ function! te#git#get_status() abort
     let l:result.modify=''
     let l:result.untracked=''
     let l:st=te#compatiable#systemlist('git status -s')
+    if type(l:st) == g:t_number
+        return ''
+    endif
     for l:i in l:st
         if matchstr(l:i, '^M') !=# ''
             let l:result.staged='S'
@@ -38,7 +48,10 @@ endfunction
 
 function! s:get_remote_name() abort
     let l:remote_name=te#compatiable#systemlist('git remote')
-    if v:shell_error || len(l:remote_name) == 0
+    if type(l:remote_name) == g:t_number
+        return ''
+    endif
+    if v:shell_error || type(l:remote_name) == g:t_number
         call te#utils#EchoWarning('Git remote name failed!')
         return 1
     endif
@@ -47,6 +60,9 @@ endfunction
 
 function! te#git#get_remote_name(A, L, P) abort
     let l:remote_name=te#compatiable#systemlist('git remote')
+    if type(l:remote_name) == g:t_number
+        return ''
+    endif
     if v:shell_error || len(l:remote_name) == 0
         call te#utils#EchoWarning('Git remote name failed!')
         return ''
@@ -94,6 +110,9 @@ endfunction
 " get all the remote branch name into a string seperate by CR
 function! te#git#GetRemoteBr(A,L,P) abort
     let l:all_remote_name=te#compatiable#systemlist('git branch -r')
+    if type(l:all_remote_name) == g:t_number
+        return ''
+    endif
     if empty(l:all_remote_name) == 1
         call te#utils#EchoWarning('No remote name found!')
         return 1
@@ -108,6 +127,9 @@ endfunction
 function! te#git#get_latest_sevral_commit(A, L, P) abort
     let l:temp=a:A.a:L.a:P
     let g:log=te#compatiable#systemlist('git log --abbrev-commit -6 --pretty=oneline')
+    if type(g:log) == g:t_number
+        return ''
+    endif
     if empty(g:log) == 1
         call te#utils#EchoWarning('git log failed')
         return 1
@@ -188,29 +210,65 @@ function! te#git#show_log(dir) abort
     return 1
 endfunction
 
-function! te#git#git_browse() abort
+function! te#git#get_url() abort
     let l:remote_name=s:get_remote_name()
     if type(l:remote_name) != g:t_string
-        return
+        return ""
     endif
     let l:remote_url=te#compatiable#systemlist('git remote get-url '.l:remote_name)
+    if type(l:remote_url) == g:t_number
+        return ''
+    endif
     if matchstr(l:remote_url[0], '\v(https?://|ftp://|file:/{3}|www\.)(\w|[.-])+(:\d+)?(/(\w|[~@#$%^&+=/.?:-])+)?') !=# ''
-        call te#utils#open_url(l:remote_url[0])
-        return
+        return substitute(l:remote_url[0],'\.git$','','')
     else
         let l:wrong_url = matchstr(l:remote_url[0], 'git@\zs.*\ze:.*')
         if l:wrong_url !=# '' 
             let l:wrong_url_reset = matchstr(l:remote_url[0], ':\zs.*\ze$')
             if l:wrong_url_reset !=# ''
-                call te#utils#open_url('https://'.l:wrong_url.'/'.l:wrong_url_reset)
-                return
+                return substitute('https://'.l:wrong_url.'/'.l:wrong_url_reset,'\.git$','','')
             endif
         endif
         let l:wrong_url = matchstr(l:remote_url[0], '\v(git://|ssh://)\zs.*\ze.*')
         if l:wrong_url !=# ''
-            call te#utils#open_url('https://'.l:wrong_url)
-            return
+            return substitute('https://'.l:wrong_url,'\.git$','','')
         endif
-        call te#utils#EchoWarning('Can not recognize url:', l:remote_url[0])
+    endif
+    call te#utils#EchoWarning('Can not recognize url', l:remote_url[0])
+    return ""
+endfunction
+
+"action:
+"0x1:open url using default browser
+"0x2:visual mode
+function! te#git#browse_file(action) abort
+    let l:git_url = te#git#get_url()
+    let l:branch_name=te#git#get_cur_br_name()
+    let l:relative_dir = te#compatiable#systemlist('git rev-parse --show-toplevel')
+    if type(l:relative_dir) == g:t_number
+        call te#utils#EchoWarning("Get git root dir fail!")
+        return
+    endif
+    let l:relative_dir[0] = substitute(expand('%:p'),l:relative_dir[0],'','')
+    if l:git_url !=# '' && type(l:branch_name) == g:t_string
+        if and(a:action,0x2) == 0x2
+            let l:line='#L'.line("'<").'-L'.line("'>")
+        else
+            let l:line='#L'.line(".")
+        endif
+        let l:final_url = l:git_url.'/blob/'.l:branch_name.l:relative_dir[0].l:line
+        if and(a:action,0x1) == 1
+            call te#utils#open_url(l:final_url)
+        else
+            let @+=l:final_url
+            call te#utils#EchoWarning('Copy url '.l:final_url.' to system clipboard successfully')
+        endif
+    endif
+endfunction
+
+function! te#git#git_browse() abort
+    let l:git_url = te#git#get_url()
+    if l:git_url !=# ''
+        call te#utils#open_url(l:git_url)
     endif
 endfunction

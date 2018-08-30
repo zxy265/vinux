@@ -6,10 +6,17 @@ let s:completer = $VIMFILES . '/bin/get_complete '
 
 function! s:self.complete(ArgLead, CmdLine, CursorPos) abort
     if a:CmdLine =~# '^\s\{0,\}\w\+$'
-        return te#compatiable#systemlist('compgen -c ' . a:CmdLine)
+        let l:result = te#compatiable#systemlist('compgen -c ' . a:CmdLine)
+        if type(l:result) == g:t_number
+            return [] 
+        endif
+        return l:result
     endif
-    let result = te#compatiable#systemlist(s:completer.a:CmdLine)
-    return map(result, 'substitute(v:val, "[ ]*$", "", "g")')
+    let l:result = te#compatiable#systemlist(s:completer.a:CmdLine)
+    if type(l:result) == g:t_number
+        return [] 
+    endif
+    return map(l:result, 'substitute(v:val, "[ ]*$", "", "g")')
 endfunction
 
 
@@ -17,16 +24,23 @@ endfunction
 
 function! s:self.complete_input(ArgLead, CmdLine, CursorPos) abort
     if a:CmdLine =~# '^\s\{0,\}\w\+$'
-        return te#compatiable#systemlist('compgen -c ' . a:CmdLine)
+        let l:result = te#compatiable#systemlist('compgen -c ' . a:CmdLine)
+        if type(l:result) == g:t_number
+            return [] 
+        endif
+        return l:result
     endif
-    let result = te#compatiable#systemlist(s:completer.a:CmdLine)
+    let l:result = te#compatiable#systemlist(s:completer.a:CmdLine)
+    if type(l:result) == g:t_number
+        return [] 
+    endif
     if a:ArgLead ==# ''
-        let result = map(result, 'a:CmdLine . v:val')
+        let l:result = map(l:result, 'a:CmdLine . v:val')
     else
         let leader = substitute(a:CmdLine, '[^ ]*$', '', 'g')
-        let result = map(result, 'leader . v:val')
+        let l:result = map(l:result, 'leader . v:val')
     endif
-    return result
+    return l:result
 endfunction
 
 function! te#bashcomplete#cmd_complete(ArgLead, CmdLine, CursorPos) abort

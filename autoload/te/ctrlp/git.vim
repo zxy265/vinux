@@ -86,5 +86,8 @@ function! te#ctrlp#git#start(arg) abort
     elseif a:arg == 4 
         let s:text = te#compatiable#systemlist("git for-each-ref --format='%(refname:short)' refs/remotes/")
     endif
+    if type(s:text) == g:t_number
+        return
+    endif
     call ctrlp#init(te#ctrlp#git#id()) 
 endfunction

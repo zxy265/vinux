@@ -532,6 +532,10 @@ function! te#utils#get_plugin_name(A,L,P) abort
     else
         let l:dir = te#compatiable#systemlist('find * -maxdepth 0 -type d')
     endif
+    if type(l:dir) == g:t_number
+        call te#utils#EchoWarning("List dir fail!", 'err')
+        return ''
+    endif
     for l:str in l:dir
         let l:result.=l:str.nr2char(10)
     endfor
