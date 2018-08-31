@@ -244,6 +244,14 @@ endfunction
 function! te#git#browse_file(action) abort
     let l:git_url = te#git#get_url()
     let l:branch_name=te#git#get_cur_br_name()
+    if matchstr(l:branch_name,'HEAD detached at') !=# ''
+        let l:temp=te#compatiable#systemlist("git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/".s:get_remote_name()."/@@'")
+        if type(l:temp) == g:t_number
+            let l:branch_name="master"
+        else
+            let l:branch_name=l:temp[0]
+        endif
+    endif
     let l:relative_dir = te#compatiable#systemlist('git rev-parse --show-toplevel')
     if type(l:relative_dir) == g:t_number
         call te#utils#EchoWarning("Get git root dir fail!")
