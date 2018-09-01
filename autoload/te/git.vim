@@ -238,10 +238,18 @@ function! te#git#get_url() abort
     return ""
 endfunction
 
+function! te#git#is_git_repo() abort
+    silent! call te#compatiable#systemlist('git rev-parse --is-inside-work-tree')
+    return v:shell_error
+endfunction
+
 "action:
 "0x1:open url using default browser
 "0x2:visual mode
 function! te#git#browse_file(action) abort
+    if te#git#is_git_repo() != 0
+        call te#utils#goto_cur_file(2)
+    endif
     let l:git_url = te#git#get_url()
     let l:branch_name=te#git#get_cur_br_name()
     if matchstr(l:branch_name,'HEAD detached at') !=# ''
