@@ -12,6 +12,7 @@ setlocal autoindent
 setlocal fileformat=unix
 
 nnoremap <buffer><silent> <Enter> :call te#complete#goto_def("")<cr>
+nnoremap <buffer> <C-\>g :split<cr>:call te#complete#goto_def("")<cr>
 
 "sudo pip3 install yapf
 if te#env#Executable('yapf')
