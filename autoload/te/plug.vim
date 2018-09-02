@@ -56,10 +56,22 @@ function! s:scroll_preview(down) abort
   endif
 endfunction
 
+function! s:get_plugin_name_in_visual_mode() abort
+    let l:sline=line("'<")
+    let l:eline=line("'>")
+    let l:result=''
+    while l:sline <= l:eline
+        let l:result.=matchstr(getline(l:sline), '^[x-] \zs\S\+\ze:').' '
+        let l:sline+=1
+    endw
+    return l:result
+endfunction
+
 function! te#plug#extra_key() abort
     nnoremap <silent> <buffer> J :call <sid>scroll_preview(1)<cr>
     nnoremap <silent> <buffer> K :call <sid>scroll_preview(0)<cr>
     nnoremap <silent> <buffer> U :execute ':PlugUpdate '.matchstr(getline('.'), '^[x-] \zs\S\+\ze:')<cr>
+    xnoremap <silent> <buffer> U :<c-u>execute ':PlugUpdate '.<SID>get_plugin_name_in_visual_mode()<cr>
     nnoremap <silent> <buffer> <c-n> :call search('^  \X*\zs\x')<cr>
     nnoremap <silent> <buffer> <c-p> :call search('^  \X*\zs\x', 'b')<cr>
     nmap <silent> <buffer> dd <nop>
