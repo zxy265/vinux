@@ -21,6 +21,7 @@ if g:fuzzysearcher_plugin_name.cur_val ==# 'leaderf' && te#env#SupportAsync()
     nnoremap <Leader>pt :LeaderfBufTag<cr>
     "colorsceme
     nnoremap <Leader>pc :LeaderfColorscheme<cr>
+    nnoremap <Leader>ff :Leaderf dir<cr>
     "CtrlP cmd
     let g:Lf_ShortcutF = '<C-P>'
     let g:Lf_ShortcutB = '<C-j>'
@@ -30,6 +31,14 @@ if g:fuzzysearcher_plugin_name.cur_val ==# 'leaderf' && te#env#SupportAsync()
     let g:Lf_StlSeparator = { 'left': '', 'right': '' }
     let g:Lf_UseMemoryCache = 0
     nnoremap <Leader><Leader> :LeaderfFile<cr>
+let g:Lf_Extensions = {
+			\ "dir": {
+			\       "source": function("te#leaderf#dir#source"),
+			\       "accept": function("te#leaderf#dir#accept"),
+			\       "supports_name_only": 1,
+			\       "supports_multi": 0,
+			\ },
+			\}
 elseif g:fuzzysearcher_plugin_name.cur_val ==# 'denite.nvim' && te#env#SupportPy3() 
             \ && te#env#SupportAsync()
     Plug 'Shougo/denite.nvim'
