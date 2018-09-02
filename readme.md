@@ -19,7 +19,7 @@ Feature:
 - Spacemacs-like keymap.
 - Lazyload.
 - Compatiable with Vim 7.3.
-- optimize for Linux kernel and uboot development
+- Optimize for Linux kernel and uboot development.
 
 # Buy me a coffee
 
