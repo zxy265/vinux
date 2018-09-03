@@ -22,6 +22,8 @@ if g:fuzzysearcher_plugin_name.cur_val ==# 'leaderf' && te#env#SupportAsync()
     "colorsceme
     nnoremap <Leader>pc :LeaderfColorscheme<cr>
     nnoremap <Leader>ff :Leaderf dir<cr>
+    nnoremap <Leader>fe :Leaderf feat -e<cr>
+    nnoremap <Leader>fd :Leaderf feat<cr>
     "CtrlP cmd
     let g:Lf_ShortcutF = '<C-P>'
     let g:Lf_ShortcutB = '<C-j>'
@@ -35,6 +37,15 @@ let g:Lf_Extensions = {
 			\ "dir": {
 			\       "source": function("te#leaderf#dir#source"),
 			\       "accept": function("te#leaderf#dir#accept"),
+			\       "supports_name_only": 1,
+			\       "supports_multi": 0,
+			\ },
+			\ "feat": {
+			\       "source": function("te#leaderf#feat#source"),
+			\       "accept": function("te#leaderf#feat#accept"),
+            \ "arguments": [
+            \  { "name": ["-e"], "nargs": 0, "help": "Enable"},
+            \ ],
 			\       "supports_name_only": 1,
 			\       "supports_multi": 0,
 			\ },
