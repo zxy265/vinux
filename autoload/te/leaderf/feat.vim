@@ -60,7 +60,7 @@ endfunction
 
 
 
-function! te#leaderf#feat#Get_digest(line, mode)
+function! te#leaderf#feat#Get_digest(line, mode) abort
 	" full path, i.e, the whole line
 	if a:mode == 0
 		return [a:line, 0]
@@ -73,7 +73,3 @@ function! te#leaderf#feat#Get_digest(line, mode)
 		return [items[2], len(a:line) - len(items[2])]
 	endif
 endfunction
-
-function! Do_nothing(orig_buf_nr, orig_cursor, args)
-endfunction
-
