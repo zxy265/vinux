@@ -14,6 +14,11 @@ else
     " vim calculator
     nnoremap <Leader>ac :Crunch<cr>
 endif
+Plug 'sk1418/HowMuch',{'on': 'HowMuch'}
+xnoremap <Leader>ac :<C-u>HowMuch =<cr>
+xnoremap <Leader>ar :<C-u>HowMuch r<cr>
+let g:HowMuch_scale = 16
+let g:HowMuch_auto_engines = ['py', 'vim', 'bc']
 Plug 'ianva/vim-youdao-translater', {'do': 'pip install requests --user','on': ['Ydc','Ydv']}
 command! -nargs=? Translate call te#trans#translate(<q-args>)
 command! -nargs=? -range TranslateReplace call te#trans#replace(<q-args>)
