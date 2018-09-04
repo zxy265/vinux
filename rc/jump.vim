@@ -33,21 +33,22 @@ if g:fuzzysearcher_plugin_name.cur_val ==# 'leaderf' && te#env#SupportAsync()
     let g:Lf_StlSeparator = { 'left': '', 'right': '' }
     let g:Lf_UseMemoryCache = 0
     nnoremap <Leader><Leader> :LeaderfFile<cr>
+    "'need_exit': function('te#leaderf#dir#needExit'),
 let g:Lf_Extensions = {
-			\ "dir": {
-			\       "source": function("te#leaderf#dir#source"),
-			\       "accept": function("te#leaderf#dir#accept"),
-			\       "supports_name_only": 1,
-			\       "supports_multi": 0,
+			\ 'dir': {
+			\       'source': function('te#leaderf#dir#source'),
+			\       'accept': function('te#leaderf#dir#accept'),
+			\       'supports_name_only': 1,
+			\       'supports_multi': 0,
 			\ },
-			\ "feat": {
-			\       "source": function("te#leaderf#feat#source"),
-			\       "accept": function("te#leaderf#feat#accept"),
-            \ "arguments": [
-            \  { "name": ["-e"], "nargs": 0, "help": "Enable"},
+			\ 'feat': {
+			\       'source': function('te#leaderf#feat#source'),
+			\       'accept': function('te#leaderf#feat#accept'),
+            \ 'arguments': [
+            \  { 'name': ["-e"], 'nargs': 0, 'help': 'Enable'},
             \ ],
-			\       "supports_name_only": 1,
-			\       "supports_multi": 0,
+			\       'supports_name_only': 1,
+			\       'supports_multi': 0,
 			\ },
 			\}
 elseif g:fuzzysearcher_plugin_name.cur_val ==# 'denite.nvim' && te#env#SupportPy3() 

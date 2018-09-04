@@ -59,17 +59,3 @@ function! te#leaderf#feat#accept(line, args) abort
 endfunction
 
 
-
-function! te#leaderf#feat#Get_digest(line, mode) abort
-	" full path, i.e, the whole line
-	if a:mode == 0
-		return [a:line, 0]
-		" name only, i.e, the part of file name
-	elseif a:mode == 1
-		return [split(a:line)[0], 0]
-		" directory, i.e, the part of greped line
-	else
-		let items = split(a:line, '\t')
-		return [items[2], len(a:line) - len(items[2])]
-	endif
-endfunction

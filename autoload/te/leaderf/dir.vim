@@ -18,6 +18,14 @@ function! te#leaderf#dir#source(args) abort
     return l:text
 endfunction
 
+function! te#leaderf#dir#needExit(line, args) abort
+    let l:file_or_dir=matchstr(a:line,".*[^@]")
+    if isdirectory(l:file_or_dir)
+        return 0
+    else
+        return 1
+    endif
+endfunction
 
 function! te#leaderf#dir#accept(line, args) abort
     let l:file_or_dir=matchstr(a:line,".*[^@]")
@@ -28,20 +36,3 @@ function! te#leaderf#dir#accept(line, args) abort
         execute 'e '.l:file_or_dir
     endif
 endfunction
-
-
-
-function! te#leaderf#dir#Get_digest(line, mode) abort
-	" full path, i.e, the whole line
-	if a:mode == 0
-		return [a:line, 0]
-		" name only, i.e, the part of file name
-	elseif a:mode == 1
-		return [split(a:line)[0], 0]
-		" directory, i.e, the part of greped line
-	else
-		let items = split(a:line, '\t')
-		return [items[2], len(a:line) - len(items[2])]
-	endif
-endfunction
-
