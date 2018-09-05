@@ -31,7 +31,9 @@ function! te#leaderf#dir#accept(line, args) abort
     let l:file_or_dir=matchstr(a:line,".*[^@]")
     if isdirectory(l:file_or_dir)
         execute 'cd 'l:file_or_dir
-        :Leaderf dir
+        let source = te#leaderf#dir#source(0)
+        norm! ggdG
+        call setline(1, source)
     else
         execute 'e '.l:file_or_dir
     endif
