@@ -247,7 +247,7 @@ nnoremap <Leader>ws :sp<cr>
 " horizontal open window then focus the new one
 nnoremap <Leader>wS :sp<cr><C-w>j
 " maxsize of current windows
-nnoremap <Leader>wm :only<cr>
+nnoremap <Leader>wo :only<cr>
 " quit current windows
 nnoremap <Leader>wd :q<cr>
 " switch between two windows alternately
@@ -309,7 +309,7 @@ nnoremap <Leader>nt :tabnew<cr>
 "generate tags and cscope
 nnoremap <LocalLeader>u :call te#pg#gen_cs_out()<cr>
 
-nnoremap <leader>mw :call te#tools#max_win()<cr>
+nnoremap <leader>wm :call te#tools#max_win()<cr>
 
 "run command from input
 nnoremap <leader>rc :call te#utils#run_command("", 1)<cr>

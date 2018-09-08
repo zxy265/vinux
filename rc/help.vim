@@ -1,8 +1,9 @@
 " Help:Welcome screen, leader guide
 " Package info {{{
 if v:version >= 704
-    Plug 'hecal3/vim-leader-guide'
-    nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
+    Plug 'liuchengxu/vim-which-key',{'branch':'allow-provide-description-only'}
+    nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+    nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 endif
 
 Plug 'mhinz/vim-startify',{'commit': '5df5b7478c09991bd20ab50cc65023cda826b2bf'}
@@ -35,7 +36,7 @@ let g:startify_commands = [
 
 noremap <F8> :SSave<cr>
 " Open startify windows
-nnoremap <Leader>bh :Startify<cr>
+nnoremap <Leader>hh :Startify<cr>
 autocmd misc_group FileType startify setlocal buftype=
 " Session save 
 nnoremap <Leader>ss :SSave<cr>
@@ -43,5 +44,208 @@ nnoremap <Leader>ss :SSave<cr>
 nnoremap <Leader>sl :SLoad 
 " Session delete
 nnoremap <Leader>sd :SDelete<cr>
+"}}}
+"which-key {{{
+function! s:which_key_setting()
+    let g:which_key_map = {}
+    let g:which_key_map.a = { 
+                \ 'name' : '+application',
+                \ 'b': 'Preview window',
+                \ 'c': 'Calculator',
+                \ 'd': 'Calendar',
+                \ 'e': 'Translate:zh2en',
+                \ 'F': 'opens the current working directory in the File manager' ,
+                \ 'f': "Go to the current file's directory in the File manager",
+                \ 'l': 'easy align',
+                \ 'r': 'Enter screensaver',
+                \ 's': 'Open shell in vim in a split window',
+                \ 'T': 'Go to the current working directory in the Terminal',
+                \ 't': "Go to the current file's directory in the Terminal",
+                \ 'v': 'Open shell in vim in a vertical split window',
+                \ 'w': 'toggle drawit plugin',
+                \ 'y': 'Translate using youdao dict',
+                \ 'z': 'Translate:en2ch',
+                \ 'h': 'hex to ascii',
+                \ }
+    let g:which_key_map.b = { 
+                \ 'name' : '+buffer',
+                \ 'a': 'Delete all buffer',
+                \ 'd': 'Delete current buffer',
+                \ 'n': 'Switch to next buffer or tab',
+                \ 'p': 'Switch to previous buffer or tab',
+                \ 'o': 'Delete all buffer except current one',
+                \ }
+    let g:which_key_map.c = { 
+                \ 'name' : '+Comment',
+                \ 'SPC': 'Comment toggle',
+                \ 'A': 'Commnet append',
+                \ 'a': 'Commnet alt delims',
+                \ 'c': 'Commnet',
+                \ 'l': 'Comment align left',
+                \ 'm': 'Comment minimal',
+                \ 'n': 'Comment nested',
+                \ 'p': 'Cd to selected plugin directory',
+                \ 's': 'Commnet sexy',
+                \ 'u': 'UnCommnet',
+                \ 'y': 'Comment and yank',
+                \ }
+    let g:which_key_map.d = { 
+                \ 'name' : '+Do',
+                \ 'd': 'Ctrl-d in normal mode',
+                \ 'i': 'drawit start',
+                \ 's': 'drawit stop',
+                \ }
+    let g:which_key_map.f = { 
+                \ 'name' : '+file_or_feature',
+                \ 'c' : "Go to the current file's directory",
+                \ 'd' : "Disable feature",
+                \ 'e' : "Enable feature",
+                \ 'f' : "Fuzzy search dir and file(not recursive)",
+                \ 'j' : 'Open vim Explorer',
+                \ 'R' : 'Open rename Explorer',
+                \ 'r' : 'reset feature.vim',
+                \ 's' : 'Save current file',
+                \ 'S' : 'Save all file',
+                \ 'u' : 'Generate feature.vim',
+                \ }
+    let g:which_key_map.g = { 
+                \ 'name' : '+git',
+                \ 'A' : 'Archive vinux and move the archive to current dir',
+                \ 'a' : 'Git add',
+                \ 'b' : 'open Git blame window',
+                \ 'C' : 'Archive current git repo and move the archive to current dir',
+                \ 'c' : 'Cd to the root dir of git repo',
+                \ 'd' : 'git diff current file with previous verion',
+                \ 'e' : "Open git repo's config",
+                \ 'f' : "Git fetch all",
+                \ 'h' : "Open git url using default web browser",
+                \ 'i' : "Open git issue window",
+                \ 'l' : "Open git log window",
+                \ 'm' : "Merge and rebase with selected branch",
+                \ 'p' : "git push to selected branch ",
+                \ 's' : 'Open git status window',
+                \ 'g' : 'Gerrit push',
+                \ }
+    let g:which_key_map.h = { 
+                \ 'name' : '+help',
+                \ 'e' : ':help eval.txt',
+                \ 'f' : ':help function-list',
+                \ 'm' : 'Open manual of current cursor word',
+                \ 'p' : 'Open vim programming document',
+                \ 'h' : 'Open start screen',
+                \ }
+    let g:which_key_map.j = { 
+                \ 'name' : '+jump',
+                \ 'j' : 'easymotion:search 1 char',
+                \ 'l' : 'easymotion:Line downward and upward',
+                \ 's' : 'easymotion:search multiple previous char ',
+                \ 't' : 'easymotion:search multiple next char',
+                \ 'w' : 'easymotion:word',
+                \ }
+    let g:which_key_map.l = { 
+                \ 'name' : '+love',
+                \ 'o' : 'save your own vim setting',
+                \ }
+    let g:which_key_map.m = { 
+                \ 'name' : '+bookmark_or_markdown',
+                \ '/' : 'Search next highlight',
+                \ '?' : 'Search previous highlight',
+                \ 'a' : 'Add bookmark',
+                \ 'b' : 'Show all bookmarks',
+                \ 'c' : 'Clear bookmark',
+                \ 'i' : 'Add bookmark with annotate',
+                \ 'j' : 'Move down curent line',
+                \ 'k' : 'Move up curent line',
+                \ 'm' : 'Mark current word',
+                \ 'p' : 'Markdown preview',
+                \ 'r' : 'highlight words that match specified regex',
+                \ 's' : 'show Markdown toc',
+                \ 't' : 'gen Markdown toc',
+                \ }
+    let g:which_key_map.n = { 
+                \ 'name' : '+nothing',
+                \ 'f' : 'nerdtree find',
+                \ 'l' : 'narrow vip',
+                \ 'm' : 'show avaliable linter',
+                \ 'q' : 'clear all highlight mark',
+                \ 'r' : 'Narrow',
+                \ 'w' : 'Narrow current visible window',
+                \ }
+    let g:which_key_map.o = { 
+                \ 'name' : '+Org',
+                \ 'b' : 'org checkbox toggle',
+                \ 'c' : 'New org checkbox below',
+                \ 'd' : 'Org interactive',
+                \ 'l' : 'Open url',
+                \ 'n' : 'Org insert hyperlink',
+                \ 's' : 'Org insert timestamp',
+                \ 't' : 'Org todo',
+                \ 'u' : 'Org checkbox update',
+                \ 'w' : 'Org open index.org',
+                \ }
+    let g:which_key_map.p = { 
+                \ 'name' : '+FuzzySearcher_or_Plugin',
+                \ 'b' : 'Buffer',
+                \ 'c' : 'Colorscheme',
+                \ 'k' : 'Function',
+                \ 'l' : 'PluginList',
+                \ 'm' : 'Marker',
+                \ 'p' : 'File',
+                \ 'r' : 'Mru',
+                \ 's' : 'Searcher itself',
+                \ 't' : 'tag',
+                \ 'u' : 'Plugin update',
+                \ 'w' : 'Show current directory',
+                \ }
+    let g:which_key_map.q = { 
+                \ 'name' : '+quit_or_cmd_win',
+                \ '/' : 'Open Search history window',
+                \ 'a' : 'Quit all window',
+                \ 'c' : 'Open histor command line window',
+                \ 'f' : 'Open quickfix window',
+                \ 'l' : 'Open location list window',
+                \ 'A' : 'Quit all windows without confirm',
+                \ 'q' : 'Quit current window',
+                \ 's' : 'Quit all windows and save all',
+                \ 'w' : 'Close current tab',
+                \ }
+    let g:which_key_map.r = { 
+                \ 'name' : '+Run',
+                \ 'c' : 'Run command from user input',
+                \ }
+    let g:which_key_map.s = { 
+                \ 'name' : '+Show_or_session',
+                \ 'b' : 'Show all branch',
+                \ 'c' : 'run neomake',
+                \ 'd' : 'Delete session',
+                \ 'm' : 'Show message',
+                \ 'm' : 'Show message',
+                \ 'o' : 'Source vimrc',
+                \ 's' : 'Session save',
+                \ 't' : 'Show git tag',
+                \ }
+    let g:which_key_map.t = { 
+                \ 'name' : '+Toggle',
+                \ 'b' : 'Toggle background color',
+                \ 'c' : 'Toggle cursor option',
+                \ 'd' : 'Toggle fileformat between dos and unix',
+                \ 'e' : 'Toggle nerdtree window',
+                \ 'f' : 'Toggle fenc between utf-8 and cp936',
+                \ 'g' : 'Menu toggle',
+                \ 'h' : 'Toggle cursorword',
+                \ 'l' : 'Toggle termguicolors',
+                \ 'm' : 'Toggle mouse',
+                \ 'n' : 'Toggle number option',
+                \ 'o' : 'Toggle Goyo window',
+                \ 'p' : 'Toggle paste option',
+                \ 't' : 'Toggle tagbar window',
+                \ 'v' : 'Toggle focus window',
+                \ 'w' : 'Toggle unlimit textwidth option',
+                \ 'z' : 'Toggle spell option',
+                \ }
+    call which_key#register('<Space>', "g:which_key_map")
+endfunction
+
+call te#feat#register_vim_enter_setting(function('<SID>which_key_setting'))
 "}}}
 " vim: set fdm=marker foldlevel=0 foldmarker& filetype=vim: 
