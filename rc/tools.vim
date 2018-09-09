@@ -66,8 +66,6 @@ vnoremap <F10> <esc>:Ydv<cr>
 nnoremap <Leader>ay <esc>:Ydc<cr>
 " YouDao translate (visual mode)
 vnoremap <Leader>ay <esc>:Ydv<cr>
-"hex to ascii convert
-nnoremap <leader>ah :call Hex2asciiConvert()<cr>
 " open current file's position with default file explorer
 nmap <Leader>af gof
 " open current file's position with default terminal
