@@ -15,10 +15,10 @@ Plug 'mbbill/undotree',  { 'on': 'UndotreeToggle'   }
 Plug 'tweekmonster/spellrotate.vim', {'on': ['<Plug>(SpellRotateForward)']}
 call te#feat#register_vim_plug_insert_setting([], 
             \ ['delimitMate'])
-nmap <silent> <leader>zn <Plug>(SpellRotateForward)
-nmap <silent> <leader>zp <Plug>(SpellRotateBackward)
-vmap <silent> <leader>zn <Plug>(SpellRotateForwardV)
-vmap <silent> <leader>zp <Plug>(SpellRotateBackwardV)
+nmap <silent> <leader>zn :set spell<cr><Plug>(SpellRotateForward)
+nmap <silent> <leader>zp :set spell<cr><Plug>(SpellRotateBackward)
+xmap <silent> <leader>zn <Plug>(SpellRotateForwardV)
+xmap <silent> <leader>zp <Plug>(SpellRotateBackwardV)
 nmap <leader>tz :call te#utils#OptionToggle('spell', [1,0])<cr>
 
 " DelimitMate ---------------------{{{

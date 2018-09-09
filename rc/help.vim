@@ -219,10 +219,69 @@ function! s:which_key_setting()
                 \ 'c' : 'run neomake',
                 \ 'd' : 'Delete session',
                 \ 'm' : 'Show message',
-                \ 'm' : 'Show message',
+                \ 'l' : 'Session load',
                 \ 'o' : 'Source vimrc',
                 \ 's' : 'Session save',
                 \ 't' : 'Show git tag',
+                \ }
+    let g:which_key_map.u = { 
+                \ 'name' : '+Update',
+                \ 'd' : 'Update vinux',
+                \ 'w' : 'Rename tmux window',
+                \ }
+    let g:which_key_map.v = { 
+                \ 'name' : '+Vvvvv',
+                \ 'b' : 'Global search in exist buffer',
+                \ 'c' : 'Edit vimrc',
+                \ 'd' : 'Copy message from specified vim command',
+                \ 'f' : 'Global search function',
+                \ 'r' : 'Run command from user input',
+                \ 's' : 'Global search from user input',
+                \ 'v' : 'Global search current cursor word',
+                \ }
+    let g:which_key_map.w = { 
+                \ 'name' : '+Window',
+                \ ',' : 'Vertical resize window -10',
+                \ '.' : 'Vertical resize window +10',
+                \ '-' : 'Horizontal resize window -10',
+                \ '=' : 'Horizontal resize window +10',
+                \ '<tab>' : 'Go to previous window',
+                \ 'c' : 'Choose win',
+                \ 'q' : 'Quit current window',
+                \ 'H' : 'Move the current window to be at the far left',
+                \ 'h' : 'Move the cursor to the left window',
+                \ 'J' : 'Move the current window to be at the very bottom',
+                \ 'j' : 'Move cursor to Nth window below current one',
+                \ 'K' : 'Move the current window to be at the very top',
+                \ 'k' : 'Move cursor to Nth window above current one',
+                \ 'L' : 'Move the current window to be at the far right',
+                \ 'l' : 'Move cursor to Nth window right of current one',
+                \ 'o' : 'Maximize window',
+                \ 'm' : 'Make the current window the only one on the screen',
+                \ 'R' : 'Rotate windows upwards/leftwards',
+                \ 'r' : 'Rotate windows downwards/rightwards',
+                \ 'S' : 'horizontal open window then focus the new one',
+                \ 's' : 'horizontal open window',
+                \ 't' : 'Move the current window to a new tab page',
+                \ 'V' : 'vertical open window then focus the new one',
+                \ 'v' : 'Vertical open window',
+                \ 'w' : 'switch between two windows',
+                \ }
+    let g:which_key_map.y = { 
+                \ 'name' : '+Yank_or_ycm',
+                \ 'd' : 'Show ycm diags',
+                \ 'f' : 'Ycm fixit',
+                \ 'j' : 'Ycm goto to definition',
+                \ 'p' : 'Ycm get parent',
+                \ 'r' : 'Quickrun current file',
+                \ 's' : 'Ycm show detail diags',
+                \ 't' : 'Ycm get type',
+                \ 'u' : 'Update ycm',
+                \ }
+    let g:which_key_map.z = { 
+                \ 'name' : '+Splee',
+                \ 'n' : 'Spell rotate forward',
+                \ 'p' : 'Spell rotate backward',
                 \ }
     let g:which_key_map.t = { 
                 \ 'name' : '+Toggle',
@@ -243,6 +302,7 @@ function! s:which_key_setting()
                 \ 'w' : 'Toggle unlimit textwidth option',
                 \ 'z' : 'Toggle spell option',
                 \ }
+
     call which_key#register('<Space>', "g:which_key_map")
 endfunction
 
