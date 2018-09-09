@@ -18,6 +18,7 @@ if get(g:, 'feat_enable_vim')
     nnoremap <buffer><silent> <c-]>  :call lookup#lookup()<cr>
     nnoremap <buffer><silent> <c-t>  :call lookup#pop()<cr>
     nnoremap <buffer><silent> <Enter> :call lookup#lookup()<cr>
+    nnoremap <buffer><silent> <localleader>g :call lookup#lookup()<cr>
     nnoremap <buffer> <C-\>g :split<cr>:call lookup#lookup()<cr>
 else
     nnoremap <buffer><silent> <Enter> <C-]>

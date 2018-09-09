@@ -245,7 +245,7 @@ function! s:which_key_setting()
                 \ '.' : 'Vertical resize window +10',
                 \ '-' : 'Horizontal resize window -10',
                 \ '=' : 'Horizontal resize window +10',
-                \ '<tab>' : 'Go to previous window',
+                \ '<Tab>' : 'Go to previous window',
                 \ 'c' : 'Choose win',
                 \ 'q' : 'Quit current window',
                 \ 'H' : 'Move the current window to be at the far left',
@@ -303,7 +303,19 @@ function! s:which_key_setting()
                 \ 'z' : 'Toggle spell option',
                 \ }
 
-    call which_key#register('<Space>', "g:which_key_map")
+    let g:which_key_map['<Tab>'] = 'switch to last open tab or buffer'
+
+    let g:which_key_map.1 = 'Tab 1'
+    let g:which_key_map.2 = 'Tab 2'
+    let g:which_key_map.3 = 'Tab 3'
+    let g:which_key_map.4 = 'Tab 4'
+    let g:which_key_map.5 = 'Tab 5'
+    let g:which_key_map.6 = 'Tab 6'
+    let g:which_key_map.7 = 'Tab 7'
+    let g:which_key_map.8 = 'Tab 8'
+    let g:which_key_map.9 = 'Tab 9'
+
+    call which_key#register('<Space>', 'g:which_key_map')
 endfunction
 
 call te#feat#register_vim_enter_setting(function('<SID>which_key_setting'))
