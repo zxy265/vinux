@@ -305,15 +305,15 @@ function! s:which_key_setting()
 
     let g:which_key_map['<Tab>'] = 'switch to last open tab or buffer'
 
-    let g:which_key_map.1 = 'Tab 1'
-    let g:which_key_map.2 = 'Tab 2'
-    let g:which_key_map.3 = 'Tab 3'
-    let g:which_key_map.4 = 'Tab 4'
-    let g:which_key_map.5 = 'Tab 5'
-    let g:which_key_map.6 = 'Tab 6'
-    let g:which_key_map.7 = 'Tab 7'
-    let g:which_key_map.8 = 'Tab 8'
-    let g:which_key_map.9 = 'Tab 9'
+    let g:which_key_map.1 = 'Tab or buffer 1'
+    let g:which_key_map.2 = 'Tab or buffer 2'
+    let g:which_key_map.3 = 'Tab or buffer 3'
+    let g:which_key_map.4 = 'Tab or buffer 4'
+    let g:which_key_map.5 = 'Tab or buffer 5'
+    let g:which_key_map.6 = 'Tab or buffer 6'
+    let g:which_key_map.7 = 'Tab or buffer 7'
+    let g:which_key_map.8 = 'Tab or buffer 8'
+    let g:which_key_map.9 = 'Tab or buffer 9'
 
     call which_key#register('<Space>', 'g:which_key_map')
 endfunction
