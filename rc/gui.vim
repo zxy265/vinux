@@ -29,6 +29,7 @@ if te#env#IsGui()
             if has("directx")
                 set renderoptions=type:directx
             endif
+            set guioptions+=!
         endif
         if g:enable_powerline_fonts.cur_val ==# 'on'
             if te#env#IsMacVim()
