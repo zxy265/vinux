@@ -96,6 +96,11 @@ endfunction
 
 "list all plugin
 function! te#plug#list() abort
+    if buflisted('[plugins_list]')
+        call te#utils#EchoWarning("Plugin list buffer is already exist!")
+        execute ':b '.bufnr("[plugins_list]")
+        return
+    endif
     tabnew
     nnoremap <buffer> q :call te#utils#quit_win(0)<cr>
     nnoremap <buffer> <2-LeftMouse> :call te#plug#open_doc()<cr>
@@ -125,5 +130,5 @@ function! te#plug#list() abort
     setlocal filetype=vim-plug
     call s:syntax()
     :0
-    :f [Plugins]
+    :f [plugins_list]
 endfunction
