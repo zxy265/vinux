@@ -370,6 +370,11 @@ function! te#utils#focus_coding() abort
 endfunction
 
 function! te#utils#check_health() abort
+    if buflisted('[health]')
+        call te#utils#EchoWarning("health buffer is already exist!")
+        execute ':b '.bufnr("[health]")
+        return
+    endif
     tabnew
     nnoremap <buffer> q :call te#utils#quit_win(0)<cr>
     setlocal wrap
