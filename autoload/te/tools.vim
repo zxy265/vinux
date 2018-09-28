@@ -69,16 +69,26 @@ function! te#tools#update_vinux() abort
 endfunction
 
 
+let s:max_flag=0
 function! te#tools#max_win() abort
-    if te#env#IsMacVim()
-        set fullscreen
-    elseif te#env#IsUnix()
-        :win 1999 1999
-        silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
-    elseif te#env#IsWindows()
-        :simalt~x "maximize window
+    if s:max_flag == 0
+        if te#env#IsMacVim()
+            set fullscreen
+        elseif te#env#IsUnix()
+            :win 1999 1999
+            silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
+        elseif te#env#IsWindows()
+            :simalt~x "maximize window
+        else
+            :win 1999 1999
+        endif
+        let s:max_flag=1
     else
-        :win 1999 1999
+        let s:max_flag=0
+        if te#env#IsMacVim()
+            set nofullscreen
+        endif
+        :win 80 25
     endif
 endfunction
 
