@@ -255,5 +255,19 @@ if g:enable_sexy_mode.cur_val ==# 'on'
     call te#feat#register_vim_enter_setting(function('SexyCommnad'))
 endif
 
+function! s:get_neomake_joblist()
+        redir => l:msg
+        :silent! call neomake#ListJobs()
+        redir END
+        if empty(l:msg)
+            return "No job is running!"
+        else
+            return l:msg
+        endif
+endfunction
+
+nnoremap <leader>nj :cexpr <SID>get_neomake_joblist()<cr>:botright copen<cr>
+
+
 
 " }}}
