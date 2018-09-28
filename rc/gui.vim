@@ -54,6 +54,7 @@ if te#env#IsGui()
     set guioptions-=T "whether show toolbar or not
     set guioptions-=e "whether use tabpage
     set guioptions+=c
+    set guioptions+=k "Keep the GUI window size when adding/removing a scrollbar
     "highlight the screen line of the cursor
     func! MenuToggle()
         if &guioptions =~# '\a*[mT]\a*[mT]'

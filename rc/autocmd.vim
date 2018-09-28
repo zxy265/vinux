@@ -28,7 +28,7 @@ augroup filetype_group
     autocmd BufRead,BufNewFile *.veo setlocal filetype=verilog
     autocmd BufRead,BufNewFile *.h setlocal filetype=c
     autocmd BufRead,BufNewFile * let $CurBufferDir=expand('%:p:h')
-    autocmd BufRead,BufNewFile *.hex,*.out,*.o,*.a Vinarise
+    autocmd BufRead,BufNewFile *.hex,*.out,*.o,*.a,*.bin Vinarise
     autocmd BufRead,BufNewFile *.fex setlocal filetype=dosini
 
     " quickfix window  s/v to open in split window,  ,gd/,jd => quickfix window => open it
