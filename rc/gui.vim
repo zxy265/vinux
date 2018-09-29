@@ -24,12 +24,12 @@ if te#env#IsGui()
             set guifont=Consolas\ 12
             set guifontwide=YaHei_Mono_Hybird_Consolas\ 12.5
         else
-            set guifont=Monaco:h12:cANSI
-            set guifontwide=YaHei_Mono:h12.5:cGB2312
+            set guioptions+=!
             if has("directx")
                 set renderoptions=type:directx
             endif
-            set guioptions+=!
+            set guifont=Monaco:h12:cANSI
+            set guifontwide=YaHei_Mono:h12.5:cGB2312
         endif
         if g:enable_powerline_fonts.cur_val ==# 'on'
             if te#env#IsMacVim()
@@ -44,6 +44,7 @@ if te#env#IsGui()
             endif
         endif
     catch /^Vim\%((\a\+)\)\=:E/
+        set guifontwide&
     endtry
     call te#feat#register_vim_enter_setting(function('te#tools#max_win'))
     " turn on this option as well

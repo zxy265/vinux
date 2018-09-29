@@ -168,6 +168,7 @@ if v:version >= 704
                     \ 'q' : 'clear all highlight mark',
                     \ 'r' : 'Narrow',
                     \ 'w' : 'Narrow current visible window',
+                    \ 'j' : 'Show list of running jobs',
                     \ }
         let g:which_key_map.o = { 
                     \ 'name' : '+Org',
