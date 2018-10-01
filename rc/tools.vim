@@ -27,6 +27,11 @@ if te#env#IsNvim() && te#env#SupportPy3()
     Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
     " Open Vim File Explorer
     nnoremap <Leader>fj :Defx -toggle -split=vertical -winwidth=50 -direction=topleft<cr>
+    noremap <F12> :Defx -toggle -split=vertical -winwidth=50 -direction=topleft<cr>
+    " Open nerd tree
+    nnoremap <leader>te :Defx -toggle -split=vertical -winwidth=50 -direction=topleft<cr>
+    " Open nerd tree
+    nnoremap <leader>nf :Defx -toggle -split=vertical -winwidth=50 -direction=topleft `expand('%:p:h')` -search=`expand('%:p')`<CR> 
 else
     Plug 'mbbill/VimExplorer',{'on': 'VE'}
     " Open Vim File Explorer
