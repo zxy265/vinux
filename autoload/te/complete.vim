@@ -1,10 +1,13 @@
 function! te#complete#goto_def(open_type) abort
     let l:cword=expand('<cword>')
+    let l:ycm_ret = -1
     execute a:open_type
-    if te#env#SupportYcm() && g:complete_plugin_type.cur_val ==# 'YouCompleteMe' && get(g:, 'feat_enable_complete', 0)
-        let l:ycm_ret=s:YcmGotoDef()
-    else
-        let l:ycm_ret = -1
+    if get(g:, 'feat_enable_complete', 0)
+        if te#env#SupportYcm() && g:complete_plugin_type.cur_val ==# 'YouCompleteMe' 
+            let l:ycm_ret=s:YcmGotoDef()
+        elseif g:complete_plugin_type.cur_val ==# 'asyncomplete.vim'
+            let l:ycm_ret=s:LspGotoDef(':LspDefinition')
+        endif
     endif
     if l:ycm_ret < 0
         try
@@ -93,4 +96,21 @@ function! te#complete#update_ycm() abort
         return
     endif
         call te#utils#run_command(l:update_command)
+endfunction
+
+function! s:LspGotoDef(command) abort
+    execute a:command
+    return 0
+endfunction
+
+function te#complete#lookup_reference() abort
+    if get(g:, 'feat_enable_complete', 0)
+        if te#env#SupportYcm() && g:complete_plugin_type.cur_val ==# 'YouCompleteMe' 
+            :YcmCompleter GoToReferences
+        elseif g:complete_plugin_type.cur_val ==# 'asyncomplete.vim'
+            :LspReferences
+        endif
+        return 0
+    endif
+    return 1
 endfunction

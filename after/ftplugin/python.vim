@@ -14,6 +14,8 @@ setlocal fileformat=unix
 nnoremap <buffer><silent> <Enter> :call te#complete#goto_def("")<cr>
 nnoremap <buffer><silent> <localleader>g :call te#complete#goto_def("")<cr>
 nnoremap <buffer> <C-\>g :split<cr>:call te#complete#goto_def("")<cr>
+nnoremap <buffer> <LocalLeader>c :call te#complete#lookup_reference()<cr>
+"nnoremap <buffer> K :call te#complete#lookup_doc()<cr>
 
 "sudo pip3 install yapf
 if te#env#Executable('yapf')
