@@ -256,6 +256,14 @@ elseif g:complete_plugin_type.cur_val ==# 'asyncomplete.vim'
                     \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
                     \ })
     endif
+	if executable('pyls')
+		" pip install python-language-server
+		au misc_group User lsp_setup call lsp#register_server({
+					\ 'name': 'pyls',
+					\ 'cmd': {server_info->['pyls']},
+					\ 'whitelist': ['python'],
+					\ })
+	endif
     let g:complete_plugin.enable_func=function('<SID>asyncomplete_setup')
     function! s:check_back_space() abort
         let col = col('.') - 1
