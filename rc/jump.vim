@@ -32,6 +32,7 @@ if g:fuzzysearcher_plugin_name.cur_val ==# 'leaderf' && te#env#SupportAsync()
     let g:Lf_StlColorscheme = 'default'
     let g:Lf_StlSeparator = { 'left': '', 'right': '' }
     let g:Lf_UseMemoryCache = 0
+    let g:Lf_ReverseOrder = 1
     nnoremap <Leader><Leader> :LeaderfFile<cr>
 let g:Lf_Extensions = {
 			\ 'dir': {
