@@ -36,9 +36,9 @@ augroup filetype_group
     autocmd FileType qfreplace,vimcalc,man setlocal nonu nornu nofoldenable | imap <buffer> <c-d> :q<cr>
                 \ | nmap <buffer> q :bdelete<cr> | setlocal matchpairs-=<:>
     autocmd FileType vim-plug nnoremap <buffer> <silent> H :call te#plug#open_doc()<cr> 
-                \ | nnoremap <buffer> <silent> gx :call te#plug#browse_plugin_url()<cr>
-                \ | nnoremap <buffer> <silent> <c-t> :call te#plug#open_plugin_dir()<cr>
-                \ | nnoremap <buffer> <silent> d :call te#plug#show_log()<cr>
+                \ | nnoremap <buffer> <silent> <leader>ol :call te#plug#browse_plugin_url()<cr>
+                \ | nnoremap <buffer> <silent> <c-t> :call te#plug#open_plugin_dir(1)<cr>
+                \ | nnoremap <buffer> <silent> D :call te#plug#show_log()<cr>
                 \ | call te#plug#extra_key()
 augroup END
 if te#env#IsNvim()

@@ -17,11 +17,14 @@ function! te#plug#open_doc() abort
     endif
 endfunction
 
-function! te#plug#open_plugin_dir() abort
+function! te#plug#open_plugin_dir(option) abort
     let name = matchstr(getline('.'), '^[x-] \zs\S\+\ze:')
     if has_key(g:plugs, name)
        execute 'cd '.g:plugs[name].dir
-       call te#tools#shell_pop(0x4)
+       if a:option == 1
+           call te#tools#shell_pop(0x4)
+       endif
+       call te#utils#EchoWarning('cd '.g:plugs[name].dir)
     endif
 endfunction
 
@@ -74,6 +77,7 @@ function! te#plug#extra_key() abort
     xnoremap <silent> <buffer> U :<c-u>execute ':PlugUpdate '.<SID>get_plugin_name_in_visual_mode()<cr>
     nnoremap <silent> <buffer> <c-n> :call search('^  \X*\zs\x')<cr>
     nnoremap <silent> <buffer> <c-p> :call search('^  \X*\zs\x', 'b')<cr>
+    nnoremap <silent> <buffer> cd :call te#plug#open_plugin_dir(0)<cr>
     nmap <silent> <buffer> dd <nop>
     nmap <silent> <buffer> <c-j> <c-n>o
     nmap <silent> <buffer> <c-k> <c-p>o
@@ -105,7 +109,7 @@ function! te#plug#list() abort
     nnoremap <buffer> q :call te#utils#quit_win(0)<cr>
     nnoremap <buffer> <2-LeftMouse> :call te#plug#open_doc()<cr>
     nnoremap <buffer> <s-LeftMouse> :call te#plug#browse_plugin_url()<cr>
-    nnoremap <buffer> <RightMouse> :call te#plug#open_plugin_dir()<cr>
+    nnoremap <buffer> <RightMouse> :call te#plug#open_plugin_dir(1)<cr>
     setlocal wrap
     setlocal mouse=a
     setlocal conceallevel=2 concealcursor=nc

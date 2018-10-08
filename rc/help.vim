@@ -278,7 +278,7 @@ if v:version >= 704
                     \ 'u' : 'Update ycm',
                     \ }
         let g:which_key_map.z = { 
-                    \ 'name' : '+Splee',
+                    \ 'name' : '+Spell',
                     \ 'n' : 'Spell rotate forward',
                     \ 'p' : 'Spell rotate backward',
                     \ }
