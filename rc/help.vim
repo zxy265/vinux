@@ -237,6 +237,7 @@ if v:version >= 704
                     \ 'r' : 'Run command from user input',
                     \ 's' : 'Global search from user input',
                     \ 'v' : 'Global search current cursor word',
+                    \ 'g' : 'Global search in current file',
                     \ }
         let g:which_key_map.w = { 
                     \ 'name' : '+Window',
