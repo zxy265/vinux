@@ -183,6 +183,7 @@ if g:git_plugin_name.cur_val ==# 'gina.vim' && te#env#SupportAsync()
                     \ 'blame', 'k',
                     \ 'k<Plug>(gina-blame-echo)'
                     \)
+        call gina#custom#execute('commit', 'setlocal omnifunc=github_complete#complete')
         let g:gina#component#repo#commit_length=6
     endfunction
 
@@ -223,7 +224,7 @@ nnoremap <Leader>gl :call te#git#show_log(".")<cr>
 if te#env#SupportPy2()
     Plug 'jaxbot/github-issues.vim', { 'on': 'Gissue' }
 endif
-Plug 'rhysd/github-complete.vim',{'for': ['gitcommit', 'markdown']}
+Plug 'rhysd/github-complete.vim',{'for': ['gitcommit', 'markdown', 'gina-commit']}
 if te#env#SupportFeature('signs')
     Plug 'airblade/vim-gitgutter', { 'on': [] }
     call te#feat#register_vim_plug_insert_setting(['GitGutterEnable'], 
