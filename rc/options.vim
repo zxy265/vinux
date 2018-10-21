@@ -198,6 +198,11 @@ if te#env#IsNvim()
     if has('vim_starting')
         syntax off
     endif
+
+    if has('nvim-0.3.1')
+        set fillchars+=msgsep:‾
+        hi MsgSeparator ctermbg=black ctermfg=white
+    endif
 endif
 
 if te#env#IsVim8()
