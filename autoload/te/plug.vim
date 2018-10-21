@@ -20,7 +20,12 @@ endfunction
 function! te#plug#open_plugin_dir(option) abort
     let name = matchstr(getline('.'), '^[x-] \zs\S\+\ze:')
     if has_key(g:plugs, name)
-       execute 'cd '.g:plugs[name].dir
+        if isdirectory(g:plugs[name].dir)
+            execute 'cd '.g:plugs[name].dir
+        else
+            call te#utils#EchoWarning(g:plugs[name].dir.' is not found!')
+            return
+        endif
        if a:option == 1
            call te#tools#shell_pop(0x4)
        endif
