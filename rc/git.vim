@@ -131,7 +131,7 @@ if g:git_plugin_name.cur_val ==# 'gina.vim' && te#env#SupportAsync()
                     \)
         silent! call gina#custom#mapping#nmap(
                     \ 'status', 'ca',
-                    \ ':<C-u>Gina commit --amend<CR>:0<cr>',
+                    \ ':<C-u>Gina commit --amend --signoff<CR>:0<cr>',
                     \ {'noremap': 1, 'silent': 1},
                     \)
         silent! call gina#custom#mapping#nmap(
@@ -192,7 +192,7 @@ if g:git_plugin_name.cur_val ==# 'gina.vim' && te#env#SupportAsync()
 else
     "fallback option
     let g:git_plugin_name.cur_val = 'vim-fugitive'
-    Plug 'tpope/vim-fugitive'
+    Plug 'tracyone/vim-fugitive'
     Plug 'gregsexton/gitv', { 'on': 'Gitv' }
     Plug 'sodapopcan/vim-twiggy', { 'on': 'Twiggy' }
     let g:fugitive_no_maps=0
