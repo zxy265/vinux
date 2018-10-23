@@ -86,7 +86,7 @@ if g:git_plugin_name.cur_val ==# 'gina.vim' && te#env#SupportAsync()
         let g:gina#command#status#use_default_mappings=0
         silent! call gina#custom#mapping#nmap(
                     \ 'status', 'cc',
-                    \ ':<C-u>Gina commit<CR>',
+                    \ ':<C-u>Gina commit --signoff<CR>',
                     \ {'noremap': 1, 'silent': 1},
                     \)
         silent! call gina#custom#mapping#nmap(
@@ -183,7 +183,8 @@ if g:git_plugin_name.cur_val ==# 'gina.vim' && te#env#SupportAsync()
                     \ 'blame', 'k',
                     \ 'k<Plug>(gina-blame-echo)'
                     \)
-        call gina#custom#execute('commit', 'setlocal omnifunc=github_complete#complete')
+        call gina#custom#execute('commit', 'setlocal omnifunc=github_complete#complete nofoldenable cursorline')
+        call gina#custom#execute('status', 'setlocal nofoldenable cursorline')
         let g:gina#component#repo#commit_length=6
     endfunction
 

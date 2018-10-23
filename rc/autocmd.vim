@@ -32,7 +32,7 @@ augroup filetype_group
     autocmd BufRead,BufNewFile *.fex setlocal filetype=dosini
 
     " quickfix window  s/v to open in split window,  ,gd/,jd => quickfix window => open it
-    autocmd FileType gitcommit,gina-status,gina-commit setlocal nofoldenable cursorline
+    autocmd FileType gitcommit setlocal nofoldenable cursorline
     autocmd FileType qfreplace,vimcalc,man setlocal nonu nornu nofoldenable | imap <buffer> <c-d> :q<cr>
                 \ | nmap <buffer> q :bdelete<cr> | setlocal matchpairs-=<:>
     autocmd FileType vim-plug nnoremap <buffer> <silent> H :call te#plug#open_doc()<cr> 
