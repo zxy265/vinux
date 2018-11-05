@@ -21,7 +21,13 @@ function! te#plug#open_plugin_dir(option) abort
     let name = matchstr(getline('.'), '^[x-] \zs\S\+\ze:')
     if has_key(g:plugs, name)
         if isdirectory(g:plugs[name].dir)
-            execute 'cd '.g:plugs[name].dir
+            if a:option == 2
+                call delete(g:plugs[name].dir, 'rf')
+                call te#utils#EchoWarning('Delete '.g:plugs[name].dir)
+            else
+                execute 'cd '.g:plugs[name].dir
+                call te#utils#EchoWarning('cd '.g:plugs[name].dir)
+            endif
         else
             call te#utils#EchoWarning(g:plugs[name].dir.' is not found!')
             return
@@ -29,7 +35,6 @@ function! te#plug#open_plugin_dir(option) abort
        if a:option == 1
            call te#tools#shell_pop(0x4)
        endif
-       call te#utils#EchoWarning('cd '.g:plugs[name].dir)
     endif
 endfunction
 
@@ -83,7 +88,7 @@ function! te#plug#extra_key() abort
     nnoremap <silent> <buffer> <c-n> :call search('^  \X*\zs\x')<cr>
     nnoremap <silent> <buffer> <c-p> :call search('^  \X*\zs\x', 'b')<cr>
     nnoremap <silent> <buffer> cd :call te#plug#open_plugin_dir(0)<cr>
-    nmap <silent> <buffer> dd <nop>
+    nmap <silent> <buffer> dd :call te#plug#open_plugin_dir(2)<cr>
     nmap <silent> <buffer> <c-j> <c-n>o
     nmap <silent> <buffer> <c-k> <c-p>o
 endfunction
