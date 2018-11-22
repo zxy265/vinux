@@ -41,7 +41,7 @@ nnoremap <Leader>sl :SLoad
 nnoremap <Leader>sd :SDelete<cr>
 "}}}
 "which-key {{{
-if v:version >= 704
+if v:version >= 704 && te#env#IsDisplay()
     Plug 'liuchengxu/vim-which-key'
     function! s:which_key_setting()
         nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
