@@ -31,6 +31,8 @@ augroup filetype_group
     autocmd BufRead,BufNewFile *.hex,*.out,*.o,*.a,*.bin Vinarise
     autocmd BufRead,BufNewFile *.fex setlocal filetype=dosini
 
+    autocmd FileType crontab setlocal nobackup nowritebackup
+
     " quickfix window  s/v to open in split window,  ,gd/,jd => quickfix window => open it
     autocmd FileType gitcommit setlocal nofoldenable cursorline
     autocmd FileType qfreplace,vimcalc,man setlocal nonu nornu nofoldenable | imap <buffer> <c-d> :q<cr>

@@ -1,8 +1,8 @@
 function! s:defx_my_settings() abort
     " Define mappings
     nnoremap <silent><buffer><expr> <CR>
-                \ defx#do_action('open')
-    nnoremap <silent><buffer><expr> c
+                \ defx#do_action('drop')
+    nnoremap <silent><buffer><expr> yy 
                 \ defx#do_action('copy')
     nnoremap <silent><buffer><expr> m
                 \ defx#do_action('move')
@@ -47,7 +47,12 @@ function! s:defx_my_settings() abort
     nnoremap <silent><buffer><expr> <C-g>
                 \ defx#do_action('print')
     nnoremap <silent><buffer><expr> <Tab> winnr('$') != 1 ?
-                \ ':<C-u>wincmd w<CR>' : ':<C-u>Defx -new -split=vertical<CR>'
+                \ ':<C-u>wincmd w<CR>' :
+                \ ':<C-u>Defx -buffer-name=temp -split=vertical<CR>'
+    nnoremap <silent><buffer><expr> \
+                \ defx#do_action('cd', getcwd())
+    nnoremap <silent><buffer><expr> c
+                \ defx#do_action('yank_path')
 endfunction
 
 call s:defx_my_settings()
